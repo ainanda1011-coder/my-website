@@ -112,6 +112,11 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .lz-pic{position:relative;width:300px;height:300px;flex-shrink:0;border-radius:16px;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,.4);transform:rotate(3deg);background:#f3efe6;display:grid;place-items:center}
 .lz-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .lz-pic svg{width:60%;height:60%}
+.lz-pbtn{all:unset;cursor:pointer;flex-shrink:0;border-radius:16px}
+.lz-pbtn:hover .lz-pic{transform:rotate(1deg) scale(1.03)}
+.lz-pbtn:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.lz-pic{transition:transform .3s}
+.lz-c:hover .lz-pic{transform:scale(1.04)}
 .lz-ar{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#1c262b;font-size:22px;line-height:1;cursor:pointer;z-index:2}
 .lz-prev{left:12px}.lz-next{right:12px}
 .lz-dots{position:absolute;bottom:14px;left:64px;display:flex;gap:6px}
@@ -600,9 +605,10 @@ function renderHero(){
   const track = $("#lzTrack"); if(!track) return;
   track.innerHTML = HERO.map((h,i) => {
     const sub = T[lang][h.k+"_s"];
+    const p = findP(h.re, h.cat);
     return `<div class="lz-s" style="background:${h.bg}" role="group" aria-label="${i+1} / ${HERO.length}">
       <div><span class="tg">${t(h.k+"_tag")}</span><h2 class="display">${t(h.k+"_t")}</h2><p>${typeof sub === "function" ? sub(FREE_SHIP || 990) : sub}</p>
-      <a class="btn" href="#shop" data-jump="${h.cat}">${t(h.k+"_c")} →</a></div>${heroPic(findP(h.re, h.cat), h.cat)}</div>`;
+      <a class="btn" href="#shop" data-jump="${h.cat}">${t(h.k+"_c")} →</a></div>${p ? `<button type="button" class="lz-pbtn" data-open="${p.id}" aria-label="${p.name[lang].replace(/"/g,"&quot;")}">${heroPic(p, h.cat)}</button>` : heroPic(p, h.cat)}</div>`;
   }).join("");
   $("#lzDots").innerHTML = HERO.map((_,i) => `<button type="button" data-slide="${i}" aria-label="${i+1}"></button>`).join("");
   $("#lzSide").innerHTML = HERO_SIDE.map(c => {
