@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <title>Trendbox — ไฟแช็กน้ำมัน นาฬิกา ของใช้ดีไซน์เท่</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,6 +52,8 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .top .wrap{display:flex;align-items:center;gap:18px;height:64px}
 .logo{font-family:"Chonburi",Georgia,serif;font-size:1.45rem;text-decoration:none;display:flex;align-items:center;gap:10px}
 .logo svg{width:22px;height:28px}
+.logo img{display:block;height:50px;width:auto}
+@media (max-width:520px){.logo img{height:40px}}
 .top nav{display:flex;gap:4px;margin-left:auto}
 .top nav a{text-decoration:none;padding:6px 12px;border-radius:999px;font-size:.95rem;opacity:.85}
 .top nav a:hover{opacity:1;background:rgba(255,255,255,.08)}
@@ -392,10 +396,7 @@ footer a:hover{opacity:1;text-decoration:underline}
 
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Trendbox">
-      <svg viewBox="0 0 22 28" aria-hidden="true"><path d="M11 1c3 5 8 8 8 15a8 8 0 0 1-16 0c0-4 2-6 4-8 0 3 1 5 3 5-1-4 0-8 1-12z" fill="#F4B860"/></svg>
-      Trendbox
-    </a>
+    <a class="logo" href="#top" aria-label="TrendyBox TH"><img src="images/logo-light.png" alt="TrendyBox TH" width="191" height="56"></a>
     <nav aria-label="หมวดสินค้า">
       <a href="#shop" data-jump="lighter" data-i18n="cat_lighter">ไฟแช็ก</a>
       <a href="#shop" data-jump="watch" data-i18n="cat_watch">นาฬิกา</a>
@@ -494,7 +495,7 @@ footer a:hover{opacity:1;text-decoration:underline}
 <footer>
   <div class="wrap">
     <div>
-      <div class="logo" style="margin-bottom:10px">Trendbox</div>
+      <div class="logo" style="margin-bottom:10px"><img src="images/logo-light.png" alt="TrendyBox TH" width="159" height="47"></div>
       <p data-i18n="foot_about">ไฟแช็กวินเทจ นาฬิกา และของใช้ดีไซน์เท่ จัดส่งจากกรุงเทพฯ ทั่วประเทศไทย</p>
     </div>
     <div>
