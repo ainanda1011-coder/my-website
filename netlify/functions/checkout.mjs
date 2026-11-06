@@ -73,7 +73,7 @@ export default async (req) => {
 
   // Reassurance text on the payment page
   const lineId = shop.settings?.lineId || "";
-  form.append("custom_text[shipping_address][message]", L === "en"
+  if (!(body.customer && body.customer.line1)) form.append("custom_text[shipping_address][message]", L === "en"
     ? "We ship from Bangkok within 1 business day and send your tracking number on LINE."
     : "เราจัดส่งจากกรุงเทพฯ ภายใน 1 วันทำการ และแจ้งเลขพัสดุให้ทาง LINE");
   form.append("custom_text[submit][message]", L === "en"
@@ -82,20 +82,46 @@ export default async (req) => {
   form.append("submit_type", "pay");
 
   form.append("mode", "payment");
-  form.append("payment_method_types[0]", "card");
-  form.append("payment_method_types[1]", "promptpay");
-  form.append("shipping_address_collection[allowed_countries][0]", "TH");
-  form.append("phone_number_collection[enabled]", "true");
+  const method = ["card", "promptpay"].includes(body.method) ? body.method : null;
+  if (method) form.append("payment_method_types[0]", method);
+  else { form.append("payment_method_types[0]", "card"); form.append("payment_method_types[1]", "promptpay"); }
+
+  // Address from the site's own checkout page: pass it to Stripe so customers don't type it twice
+  const c = body.customer && typeof body.customer === "object" ? body.customer : null;
+  const cs = (v, n = 200) => String(v || "").trim().slice(0, n);
+  if (c && cs(c.name) && cs(c.line1) && cs(c.province) && /^\d{5}$/.test(cs(c.postal))) {
+    const P = "payment_intent_data[shipping]";
+    form.append(`${P}[name]`, cs(c.name));
+    form.append(`${P}[phone]`, cs(c.phone, 20));
+    form.append(`${P}[address][line1]`, cs(c.line1));
+    form.append(`${P}[address][city]`, cs(c.district));
+    form.append(`${P}[address][state]`, cs(c.province));
+    form.append(`${P}[address][postal_code]`, cs(c.postal, 5));
+    form.append(`${P}[address][country]`, "TH");
+    form.append("metadata[customer_name]", cs(c.name));
+    form.append("metadata[customer_phone]", cs(c.phone, 20));
+    form.append("metadata[delivery_address]", cs(`${c.line1}, ${c.district}, ${c.province} ${c.postal}`, 480));
+    if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cs(c.email))) form.append("customer_email", cs(c.email));
+  } else {
+    form.append("shipping_address_collection[allowed_countries][0]", "TH");
+    form.append("phone_number_collection[enabled]", "true");
+  }
   form.append("locale", L);
   form.append("success_url", `${origin}/#thanks`);
   form.append("cancel_url", `${origin}/#cancel`);
 
-  const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
+  const send = (f) => fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/x-www-form-urlencoded" },
-    body: form,
+    body: f,
   });
-  const data = await res.json();
+  let res = await send(form);
+  let data = await res.json();
+  if (!res.ok && /shipping_options/.test(data.error?.message || "")) {
+    // Fallback: some Stripe setups only allow shipping options when Stripe collects the address
+    const f2 = new URLSearchParams([...form].filter(([k]) => !k.startsWith("shipping_options")));
+    res = await send(f2); data = await res.json();
+  }
   if (!res.ok) return json({ error: data.error?.message || "Stripe error" }, 502);
   return json({ url: data.url });
 };
