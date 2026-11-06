@@ -118,7 +118,8 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .sa-art .art svg{width:100%;height:100%}
 .sa-card:hover .art{transform:scale(1.04)}
 .sa-info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
-.sa-info .sa-btn{margin-top:auto}
+.sa-info .sa-btn,.sa-info .act{margin-top:auto}
+.sa-info .act .sa-btn{margin-top:0}
 .sa-info .price-wrap{min-height:1.9rem;align-items:center}
 
 .sa-info h3{margin:0;font-size:.95rem;font-weight:600;line-height:1.35;min-height:2.7em}
@@ -246,6 +247,12 @@ dialog.pd::backdrop{background:rgba(15,22,25,.6)}
 .add:hover,.sa-btn:hover{filter:brightness(1.05);transform:translateY(-1px);box-shadow:0 10px 20px rgba(244,184,96,.55)}
 .add:active,.sa-btn:active{transform:translateY(0)}
 
+.act{display:flex;flex-wrap:wrap;gap:8px}
+.act>button{flex:1 1 100px;min-width:0}
+.act .add,.act .sa-btn{padding:0 10px;font-size:.92rem}
+.buy{display:flex;align-items:center;justify-content:center;height:46px;padding:0 10px;border:0;border-radius:999px;background:#E2483D;color:#fff;font:inherit;font-size:.92rem;font-weight:700;white-space:nowrap;cursor:pointer;box-shadow:0 6px 16px rgba(226,72,61,.35);transition:transform .15s,box-shadow .15s,filter .15s}
+.buy:hover{filter:brightness(1.06);transform:translateY(-1px);box-shadow:0 10px 20px rgba(226,72,61,.45)}
+.buy[disabled]{opacity:.6;cursor:wait;transform:none}
 .add.done,.sa-btn.done{background:#2E7D4F;color:#fff;box-shadow:0 6px 16px rgba(46,125,79,.35)}
 .badge{align-self:flex-start;font-size:.78rem;color:var(--brass);font-weight:600}
 
@@ -507,7 +514,7 @@ const ART = {lighter:"lighter",watch:"watch",electronics:"radio",perfume:"bottle
 
 /* ===== Text ===== */
 const T = {
-  th:{cat_all:"ทั้งหมด",cat_lighter:"ไฟแช็กและที่เขี่ย",cat_watch:"นาฬิกา",cat_electronics:"อิเล็กทรอนิกส์",cat_perfume:"น้ำหอม",cat_lifestyle:"ของใช้",ask_price:"สอบถามราคา",view_laz:"ดูบน Lazada",total_tbd:"แจ้งยอดทาง LINE",ask_note:"บางรายการร้านจะแจ้งราคาให้ทาง LINE",pay:"ชำระด้วยบัตร หรือ PromptPay",sold_out:"สินค้าหมด",photos:"รูป",video:"วิดีโอ",details:"รายละเอียดสินค้า",photo:"รูปที่",view_photos:"ดูรูปสินค้า",prev:"รูปก่อนหน้า",next:"รูปถัดไป",choose:"เลือกแบบ",max_stock:"ครบจำนวนสินค้าที่มีแล้ว",pay_note:"บัตรเครดิต/เดบิต หรือสแกน QR PromptPay ผ่านหน้าชำระเงินที่ปลอดภัยของ Stripe",pay_need_price:"ชำระออนไลน์ได้เมื่อทุกรายการมีราคา",or_line:"หรือเก็บเงินปลายทาง / สอบถามก่อน",paying:"กำลังไปหน้าชำระเงิน…",pay_err:"ยังชำระออนไลน์ไม่ได้ กรุณาสั่งทาง LINE",thanks_title:"ชำระเงินเรียบร้อย ขอบคุณค่ะ",thanks_body:"เราได้รับคำสั่งซื้อแล้ว และจะส่งเลขพัสดุให้ทางอีเมลหรือ LINE ภายในวันถัดไป",thanks_btn:"กลับไปที่ร้าน",
+  th:{cat_all:"ทั้งหมด",buy_now:"ซื้อเลย",cat_lighter:"ไฟแช็กและที่เขี่ย",cat_watch:"นาฬิกา",cat_electronics:"อิเล็กทรอนิกส์",cat_perfume:"น้ำหอม",cat_lifestyle:"ของใช้",ask_price:"สอบถามราคา",view_laz:"ดูบน Lazada",total_tbd:"แจ้งยอดทาง LINE",ask_note:"บางรายการร้านจะแจ้งราคาให้ทาง LINE",pay:"ชำระด้วยบัตร หรือ PromptPay",sold_out:"สินค้าหมด",photos:"รูป",video:"วิดีโอ",details:"รายละเอียดสินค้า",photo:"รูปที่",view_photos:"ดูรูปสินค้า",prev:"รูปก่อนหน้า",next:"รูปถัดไป",choose:"เลือกแบบ",max_stock:"ครบจำนวนสินค้าที่มีแล้ว",pay_note:"บัตรเครดิต/เดบิต หรือสแกน QR PromptPay ผ่านหน้าชำระเงินที่ปลอดภัยของ Stripe",pay_need_price:"ชำระออนไลน์ได้เมื่อทุกรายการมีราคา",or_line:"หรือเก็บเงินปลายทาง / สอบถามก่อน",paying:"กำลังไปหน้าชำระเงิน…",pay_err:"ยังชำระออนไลน์ไม่ได้ กรุณาสั่งทาง LINE",thanks_title:"ชำระเงินเรียบร้อย ขอบคุณค่ะ",thanks_body:"เราได้รับคำสั่งซื้อแล้ว และจะส่งเลขพัสดุให้ทางอีเมลหรือ LINE ภายในวันถัดไป",thanks_btn:"กลับไปที่ร้าน",
     sl1_tag:"มาใหม่",sl1_t:"ไฟแช็กน้ำมันวินเทจ",sl1_s:"กันลม เติมน้ำมันได้ ใช้ได้นาน",sl1_c:"ดูไฟแช็ก",sl2_tag:"ขายดี",sl2_t:"นาฬิกาหน้าปัดทอง",sl2_s:"สไตล์คลาสสิก ทั้งออโตเมติกและควอตซ์",sl2_c:"ดูนาฬิกา",sl3_tag:"อากาศสะอาด",sl3_t:"เครื่องฟอกอากาศ HEPA",sl3_s:"อากาศสดชื่นสำหรับบ้านและคอนโด",sl3_c:"ดูอิเล็กทรอนิกส์",sl4_tag:"เก็บเงินปลายทาง",sl4_t:"ที่เขี่ยบุหรี่แก้วและสแตนเลส",sl4_s:"ส่งฟรีทุกออเดอร์ผ่านเว็บไซต์",announce:"ส่งฟรีทุกออเดอร์ เมื่อสั่งซื้อผ่านเว็บไซต์ของเรา",announce_tag:"ส่งฟรี ฿0",announce_sub:"ไม่มีขั้นต่ำ ส่งทั่วไทย 2–4 วัน",announce_cta:"ช้อปเลย",sale_kicker:"ลดราคา",sale_title:"สินค้าลดราคา",sale_sub:n=>`ลดสูงสุด <b>${n}%</b> สินค้ามีจำนวนจำกัด`,sale_left:n=>`เหลือเพียง ${n} ชิ้น`,sale_pick:"เลือกตัวเลือก",sl4_c:"ดูที่เขี่ยบุหรี่",shop_now:"ดูสินค้า",
     hero_title:"แสงไฟอุ่นๆ กับของที่มีเรื่องเล่า",hero_sub:"ไฟแช็กน้ำมันสไตล์วินเทจ นาฬิกา และของใช้ดีไซน์เท่ คัดมาสำหรับคนไทย ส่งทั่วประเทศ",hero_cta:"ดูสินค้าทั้งหมด",hero_cta2:"วิธีสั่งซื้อ",
     p1:"ส่งทั่วไทย 2–4 วัน",p1s:"Flash, Kerry หรือไปรษณีย์ไทย",p2:"เก็บเงินปลายทาง",p2s:"หรือโอนผ่าน PromptPay",p3:"ส่งฟรีทุกออเดอร์",p3s:"เมื่อสั่งซื้อผ่านเว็บไซต์",p4:"ตอบไวทาง LINE",p4s:"ทุกวัน 10:00–21:00 น.",
@@ -518,7 +525,7 @@ const T = {
     cart_title:"ตะกร้าของคุณ",empty:"ตะกร้ายังว่างอยู่",empty_btn:"เลือกสินค้า",subtotal:"ราคาสินค้า",shipping:"ค่าจัดส่ง",free:"ฟรี",total:"รวมทั้งหมด",
     more:n=>`ซื้อเพิ่มอีก ฿${n} ส่งฟรี`,order_line:"สั่งซื้อทาง LINE",order_laz:"สั่งผ่าน Lazada แทน",toast_add:"ใส่ตะกร้าแล้ว",toast_copy:"คัดลอกรายการแล้ว วางในแชท LINE ได้เลย",
     msg_head:"สวัสดีค่ะ/ครับ ขอสั่งซื้อสินค้าดังนี้",msg_ship:"ค่าส่ง",msg_total:"รวม",msg_tail:"ชื่อ / ที่อยู่ / เบอร์โทร:\nชำระเงิน: PromptPay / เก็บเงินปลายทาง"},
-  en:{cat_all:"All",cat_lighter:"Lighters & ashtrays",cat_watch:"Watches",cat_electronics:"Electronics",cat_perfume:"Perfumes",cat_lifestyle:"Lifestyle",ask_price:"Ask for price",view_laz:"View on Lazada",total_tbd:"Confirmed on LINE",ask_note:"We’ll confirm prices for some items on LINE",pay:"Pay by card or PromptPay",sold_out:"Sold out",photos:"photos",video:"Video",details:"Product details",photo:"Photo",view_photos:"View product photos",prev:"Previous photo",next:"Next photo",choose:"Choose option",max_stock:"That’s all the stock we have",pay_note:"Credit/debit card or PromptPay QR on Stripe’s secure checkout page",pay_need_price:"Online payment opens once every item has a price",or_line:"Or cash on delivery / ask us first",paying:"Opening checkout…",pay_err:"Online payment isn’t available right now. Please order on LINE",thanks_title:"Payment received, thank you",thanks_body:"We’ve got your order and will send your tracking number by email or LINE the next day.",thanks_btn:"Back to the shop",
+  en:{cat_all:"All",buy_now:"Buy now",cat_lighter:"Lighters & ashtrays",cat_watch:"Watches",cat_electronics:"Electronics",cat_perfume:"Perfumes",cat_lifestyle:"Lifestyle",ask_price:"Ask for price",view_laz:"View on Lazada",total_tbd:"Confirmed on LINE",ask_note:"We’ll confirm prices for some items on LINE",pay:"Pay by card or PromptPay",sold_out:"Sold out",photos:"photos",video:"Video",details:"Product details",photo:"Photo",view_photos:"View product photos",prev:"Previous photo",next:"Next photo",choose:"Choose option",max_stock:"That’s all the stock we have",pay_note:"Credit/debit card or PromptPay QR on Stripe’s secure checkout page",pay_need_price:"Online payment opens once every item has a price",or_line:"Or cash on delivery / ask us first",paying:"Opening checkout…",pay_err:"Online payment isn’t available right now. Please order on LINE",thanks_title:"Payment received, thank you",thanks_body:"We’ve got your order and will send your tracking number by email or LINE the next day.",thanks_btn:"Back to the shop",
     sl1_tag:"NEW ARRIVALS",sl1_t:"Vintage oil lighters",sl1_s:"Windproof, refillable, built to last",sl1_c:"Shop lighters",sl2_tag:"BEST SELLERS",sl2_t:"Gold-dial watches",sl2_s:"Classic automatic & quartz styles",sl2_c:"Shop watches",sl3_tag:"CLEAN AIR",sl3_t:"HEPA air purifiers",sl3_s:"Fresh air for home and condo",sl3_c:"Shop electronics",sl4_tag:"CASH ON DELIVERY",sl4_t:"Glass & steel ashtrays",sl4_s:"Free shipping on every web order",announce:"Free shipping on every order from our website",announce_tag:"FREE ฿0 SHIPPING",announce_sub:"No minimum. Delivered across Thailand in 2–4 days.",announce_cta:"Shop now",sale_kicker:"ON SALE",sale_title:"Deals of the day",sale_sub:n=>`Save up to <b>${n}%</b>, while stock lasts`,sale_left:n=>`Only ${n} left`,sale_pick:"Choose option",sl4_c:"Shop ashtrays",shop_now:"Shop now",
     hero_title:"Warm light and things with a story",hero_sub:"Vintage-style oil lighters, watches and well-designed everyday things, picked for Thailand and shipped nationwide.",hero_cta:"Shop everything",hero_cta2:"How to order",
     p1:"Ships across Thailand in 2–4 days",p1s:"Flash, Kerry or Thailand Post",p2:"Cash on delivery",p2s:"or pay with PromptPay",p3:"Free shipping on every order",p3s:"When you order on our website",p4:"Quick replies on LINE",p4s:"Daily, 10:00–21:00",
@@ -583,7 +590,8 @@ function priceHTML(v){
 }
 function cardBottom(p){
   const v = pickedV(p);
-  const btn = soldOut(v) ? `<button class="add" disabled>${t("sold_out")}</button>` : `<button class="add" data-add="${p.id}">${t("add")}</button>`;
+  const btn = soldOut(v) ? `<button class="add" disabled>${t("sold_out")}</button>`
+    : `<div class="act"><button class="add" data-add="${p.id}">${t("add")}</button>${v.price ? `<button class="buy" data-buy="${p.id}">${t("buy_now")}</button>` : ""}</div>`;
   return `<div class="row">${priceHTML(v)}${btn}</div>`;
 }
 function renderGrid(){
@@ -658,7 +666,7 @@ function renderSale(){
         <h3><button type="button" data-open="${p.id}">${p.name[lang]}</button></h3>
         ${priceHTML(v)}${left}
         ${multi ? `<button type="button" class="btn sa-btn" data-open="${p.id}">${t("sale_pick")}</button>`
-                : `<button type="button" class="btn sa-btn" data-add="${p.id}">${t("add")}</button>`}
+                : `<div class="act"><button type="button" class="btn sa-btn" data-add="${p.id}">${t("add")}</button><button type="button" class="buy" data-buy="${p.id}">${t("buy_now")}</button></div>`}
       </div></article>`;
   }).join("");
 }
@@ -738,6 +746,23 @@ async function orderOnLine(){
   try{ await navigator.clipboard.writeText(msg); toast(t("toast_copy")); }catch(e){}
   window.open(`https://line.me/R/oaMessage/${encodeURIComponent(LINE_ID)}/?${encodeURIComponent(msg)}`,"_blank","noopener");
 }
+async function buyNow(btn){
+  const p = PRODUCTS.find(x => x.id === btn.dataset.buy); if(!p) return;
+  const v = pickedV(p); if(!v || soldOut(v)) return;
+  const label = btn.textContent; btn.disabled = true; btn.textContent = t("paying");
+  try{
+    sessionStorage.setItem("tb_buynow", "1");
+  }catch(e){}
+  try{
+    const res = await fetch(CHECKOUT_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({items:[{sku:v.sku, qty:1}], lang})});
+    const data = await res.json();
+    if(!res.ok || !data.url) throw new Error(data.error || "checkout failed");
+    location.href = data.url;
+  }catch(err){
+    try{ sessionStorage.removeItem("tb_buynow"); }catch(e){}
+    toast(t("pay_err")); btn.disabled = false; btn.textContent = label;
+  }
+}
 async function payNow(btn){
   const items = Object.entries(cart).map(([k,qty]) => ({sku:k.split(":")[1], qty}));
   btn.disabled = true; btn.textContent = t("paying");
@@ -751,7 +776,8 @@ async function payNow(btn){
   }
 }
 function showThanks(){
-  cart = {}; save(); renderCart();
+  let bn = null; try{ bn = sessionStorage.getItem("tb_buynow"); sessionStorage.removeItem("tb_buynow"); }catch(e){}
+  if(!bn){ cart = {}; save(); renderCart(); }
   $("#thanks").classList.add("open"); $("#thanksClose").focus();
 }
 document.addEventListener("change", e => {
@@ -829,6 +855,7 @@ document.addEventListener("click", e => {
   if(b.id === "pdClose"){ $("#pd").close(); return; }
   if(b.dataset.cat){ filter = b.dataset.cat; renderChips(); renderGrid(); return; }
   if(b.dataset.jump){ filter = b.dataset.jump; renderChips(); renderGrid(); return; }
+  if(b.dataset.buy){ buyNow(b); return; }
   if(b.dataset.add){
     const p = PRODUCTS.find(x=>x.id===b.dataset.add), v = pickedV(p), k = keyOf(p,v), max = v.stock ?? 20;
     if((cart[k]||0) >= max){ toast(t("max_stock")); return; }
@@ -865,7 +892,7 @@ fetch(DATA_URL, {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(d => 
   applyShop(d); picked = {}; cleanCart(); save(); setLinks(); renderAll();
 }).catch(() => {});
 if(location.hash === "#thanks") showThanks();
-if(location.hash === "#cancel"){ history.replaceState(null,"",location.pathname); openCart(); }
+if(location.hash === "#cancel"){ history.replaceState(null,"",location.pathname); let bn = null; try{ bn = sessionStorage.getItem("tb_buynow"); sessionStorage.removeItem("tb_buynow"); }catch(e){} if(!bn) openCart(); }
 </script>
 </body>
 </html>
