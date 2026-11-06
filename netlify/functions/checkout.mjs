@@ -20,12 +20,20 @@ export default async (req) => {
     shop = await r.json();
   } catch { return json({ error: "Could not load shop data" }, 500); }
 
-  // SKU -> { name, price, stock }
+  const L = body.lang === "en" ? "en" : "th";
+  const abs = (u) => { try { const x = new URL(u, origin + "/"); return x.protocol === "https:" ? x.href : null; } catch { return null; } };
+
+  // SKU -> { name, desc, image, price, stock }
   const SKUS = {};
   for (const p of shop.products || []) {
+    const pname = (p.name && (p.name[L] || p.name.th)) || "";
     for (const v of p.variants || []) {
+      const label = v.label ? (v.label[L] || v.label.th) : "";
+      const desc = [label && (L === "en" ? `Option: ${label}` : `ตัวเลือก: ${label}`), p.desc && (p.desc[L] || p.desc.th)].filter(Boolean).join(" · ");
       SKUS[v.sku] = {
-        name: p.name.th + (v.label ? ` (${v.label.th})` : ""),
+        name: pname + (label ? ` (${label})` : ""),
+        desc,
+        image: [v.image, ...(Array.isArray(p.images) ? p.images : []), p.img].map(u => u && abs(u)).find(Boolean) || null,
         price: Number(v.price) || 0,
         stock: v.stock == null ? 20 : Number(v.stock),
       };
@@ -44,23 +52,41 @@ export default async (req) => {
     subtotal += p.price * q;
     form.append(`line_items[${i}][price_data][currency]`, "thb");
     form.append(`line_items[${i}][price_data][product_data][name]`, p.name);
+    if (p.desc) form.append(`line_items[${i}][price_data][product_data][description]`, p.desc.slice(0, 500));
+    if (p.image) form.append(`line_items[${i}][price_data][product_data][images][0]`, p.image);
     form.append(`line_items[${i}][price_data][unit_amount]`, String(Math.round(p.price * 100))); // satang
     form.append(`line_items[${i}][quantity]`, String(q));
     i++;
   }
-  if (SHIP_FEE > 0 && subtotal < FREE_SHIP) {
-    form.append(`line_items[${i}][price_data][currency]`, "thb");
-    form.append(`line_items[${i}][price_data][product_data][name]`, "ค่าจัดส่ง / Shipping");
-    form.append(`line_items[${i}][price_data][unit_amount]`, String(Math.round(SHIP_FEE * 100)));
-    form.append(`line_items[${i}][quantity]`, "1");
-  }
+  // Shipping shown as its own row ("Free" when no fee), with a 2–4 business day estimate
+  const fee = SHIP_FEE > 0 && subtotal < FREE_SHIP ? SHIP_FEE : 0;
+  const S = "shipping_options[0][shipping_rate_data]";
+  form.append(`${S}[type]`, "fixed_amount");
+  form.append(`${S}[fixed_amount][amount]`, String(Math.round(fee * 100)));
+  form.append(`${S}[fixed_amount][currency]`, "thb");
+  form.append(`${S}[display_name]`, fee ? (L === "en" ? "Standard delivery" : "จัดส่งมาตรฐาน")
+                                          : (L === "en" ? "Free delivery (Flash, Kerry or Thailand Post)" : "ส่งฟรี (Flash, Kerry หรือไปรษณีย์ไทย)"));
+  form.append(`${S}[delivery_estimate][minimum][unit]`, "business_day");
+  form.append(`${S}[delivery_estimate][minimum][value]`, "2");
+  form.append(`${S}[delivery_estimate][maximum][unit]`, "business_day");
+  form.append(`${S}[delivery_estimate][maximum][value]`, "4");
+
+  // Reassurance text on the payment page
+  const lineId = shop.settings?.lineId || "";
+  form.append("custom_text[shipping_address][message]", L === "en"
+    ? "We ship from Bangkok within 1 business day and send your tracking number on LINE."
+    : "เราจัดส่งจากกรุงเทพฯ ภายใน 1 วันทำการ และแจ้งเลขพัสดุให้ทาง LINE");
+  form.append("custom_text[submit][message]", L === "en"
+    ? `Secure payment by Stripe. We never see or store your card details. Questions? Chat with us on LINE ${lineId}.`
+    : `ชำระเงินปลอดภัยผ่าน Stripe ร้านค้าไม่เห็นและไม่เก็บข้อมูลบัตรของคุณ มีคำถาม? ทักเราทาง LINE ${lineId}`);
+  form.append("submit_type", "pay");
 
   form.append("mode", "payment");
   form.append("payment_method_types[0]", "card");
   form.append("payment_method_types[1]", "promptpay");
   form.append("shipping_address_collection[allowed_countries][0]", "TH");
   form.append("phone_number_collection[enabled]", "true");
-  form.append("locale", body.lang === "en" ? "en" : "th");
+  form.append("locale", L);
   form.append("success_url", `${origin}/#thanks`);
   form.append("cancel_url", `${origin}/#cancel`);
 
