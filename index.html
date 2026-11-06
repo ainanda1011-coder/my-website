@@ -128,6 +128,69 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .sa-left{font-size:.8rem;font-weight:700;color:#E2483D}
 @media (max-width:600px){.sale-nav{display:none}.sale-row{grid-auto-columns:46%;gap:12px}}
 
+/* ===== Checkout page (Lazada-style) ===== */
+.co{position:fixed;inset:0;z-index:60;background:#F2F1EE;overflow-y:auto;color:#1E2B33;-webkit-overflow-scrolling:touch}
+.co[hidden]{display:none}
+.co-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:12px 20px;background:var(--night);color:var(--night-ink)}
+.co-top h2{margin:0;font-size:1.15rem;flex:1}
+.co-back{all:unset;cursor:pointer;font-size:30px;line-height:1;padding:0 6px}
+.co-secure{display:flex;align-items:center;gap:6px;font-size:.85rem;color:#8FD3A8}
+.co-body{max-width:1100px;margin:0 auto;padding:16px 16px 120px;display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start}
+.co-main{display:flex;flex-direction:column;gap:14px}
+.co-card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.co-card h3{display:flex;align-items:center;gap:8px;margin:0 0 14px;font-size:1.02rem}
+.co-ic{font-size:1.05rem}
+.co-shop{margin-left:auto;font-size:.8rem;font-weight:700;background:#1E2B33;color:#F4B860;padding:3px 10px;border-radius:6px}
+.co-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.co-grid label{display:flex;flex-direction:column;gap:5px;font-size:.85rem;color:#5b6670}
+.co-grid label.full{grid-column:1/-1}
+.co-grid input{height:44px;border:1px solid #D9DCDF;border-radius:10px;padding:0 12px;font:inherit;font-size:1rem;color:#1E2B33;background:#fff}
+.co-grid input:focus{outline:2px solid #F4B860;border-color:#F4B860}
+.co-grid input.bad{border-color:#E2483D;background:#FFF6F5}
+.co-it{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid #F0F0F0}
+.co-it:first-child{border-top:0}
+.co-it .thumb{width:64px;height:64px;border-radius:10px;overflow:hidden;background:#F2F1EE;display:grid;place-items:center}
+.co-it .thumb img{width:100%;height:100%;object-fit:cover}
+.co-it .thumb svg{width:80%;height:80%}
+.co-it h4{margin:0;font-size:.92rem;font-weight:600;line-height:1.35}
+.co-it small{color:#7a848c}
+.co-it .pr{text-align:right;font-weight:700}
+.co-it .pr s{display:block;font-weight:400;color:#9aa3aa;font-size:.8rem}
+.co-it .q{color:#7a848c;font-size:.85rem;font-weight:400}
+.co-deliv{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;padding:12px 14px;border-radius:10px;background:#FFF7EA;border:1px solid #F7DDB0}
+.co-deliv div:first-child{display:flex;flex-direction:column;font-size:.9rem}
+.co-deliv span{color:#7a848c;font-size:.82rem}
+.co-free{white-space:nowrap}.co-free s{color:#9aa3aa;font-size:.85rem}.co-free b{color:#2E7D4F}
+.co-pays{display:flex;flex-direction:column;gap:10px}
+.co-pay{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px solid #E1E3E5;border-radius:12px;cursor:pointer}
+.co-pay:has(input:checked){border-color:#E39B2D;background:#FFF9EF}
+.co-pay input{accent-color:#E39B2D;width:18px;height:18px;margin:0}
+.co-pay span:last-child{display:flex;flex-direction:column}
+.co-pay small{color:#7a848c;font-size:.8rem}
+.pm-ic{width:40px;height:28px;border-radius:6px;display:grid;place-items:center;font-size:.75rem;font-weight:800;flex-shrink:0}
+.pm-pp{background:#113566;color:#fff}.pm-card{background:#EEF0F2;color:#1E2B33}.pm-cod{background:#06C755;color:#fff;font-size:1rem}
+.co-side{position:sticky;top:70px}
+.co-line{display:flex;justify-content:space-between;padding:6px 0;font-size:.93rem}
+.co-line.save{color:#E2483D}
+.co-line.tot{border-top:1px solid #EEE;margin-top:8px;padding-top:12px;font-size:1.1rem;font-weight:800}
+.co-line s{color:#9aa3aa;margin-right:6px}
+.co-trust{list-style:none;margin:14px 0 0;padding:12px 0 0;border-top:1px dashed #E3E3E3;display:flex;flex-direction:column;gap:6px;font-size:.82rem;color:#5b6670}
+.co-trust li::before{content:"✓";color:#2E7D4F;font-weight:800;margin-right:8px}
+.co-bar{position:fixed;left:0;right:0;bottom:0;z-index:3;background:#fff;box-shadow:0 -4px 16px rgba(0,0,0,.08);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+.co-bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.co-total{display:flex;flex-direction:column;align-items:flex-end;line-height:1.2}
+.co-total span{font-size:.8rem;color:#7a848c}
+.co-total b{font-size:1.4rem;color:#E2483D}
+.co-total small{font-size:.75rem;color:#2E7D4F}
+.co-place{height:50px;min-width:180px;padding:0 28px;border:0;border-radius:12px;background:#E2483D;color:#fff;font:inherit;font-size:1.05rem;font-weight:800;cursor:pointer;box-shadow:0 6px 16px rgba(226,72,61,.35)}
+.co-place:hover{filter:brightness(1.06)}
+.co-place[disabled]{opacity:.6;cursor:wait}
+.co-place.cod{background:#06C755;box-shadow:0 6px 16px rgba(6,199,85,.35)}
+body.co-open{overflow:hidden}
+body.co-open .toast{z-index:80;bottom:100px}
+@media (max-width:860px){.co-body{grid-template-columns:1fr}.co-side{position:static}}
+@media (max-width:520px){.co-grid{grid-template-columns:1fr}.co-body{padding:12px 10px 120px}.co-card{padding:14px}.co-place{min-width:140px;padding:0 18px}.co-secure span{display:none}}
+
 /* hero slider (Lazada-style) */
 .lz-hero{background:transparent;color:inherit}
 .lz-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -455,6 +518,66 @@ footer a:hover{opacity:1;text-decoration:underline}
   <div class="items" id="items"></div>
   <div class="summary" id="summary"></div>
 </aside>
+<section class="co" id="co" hidden aria-labelledby="coTitle">
+  <header class="co-top">
+    <button type="button" class="co-back" id="coBack" aria-label="Back">‹</button>
+    <h2 id="coTitle" data-i18n="co_title">ชำระเงิน</h2>
+    <span class="co-secure"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 10V8a6 6 0 0 1 12 0v2M5 10h14v11H5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span data-i18n="co_secure">ชำระเงินปลอดภัย</span></span>
+  </header>
+  <div class="co-body">
+    <div class="co-main">
+      <form class="co-card" id="coAddr" novalidate autocomplete="on">
+        <h3><span class="co-ic">📍</span><span data-i18n="co_addr">ที่อยู่จัดส่ง</span></h3>
+        <div class="co-grid">
+          <label><span data-i18n="co_name">ชื่อ-นามสกุล</span><input name="name" autocomplete="name" required></label>
+          <label><span data-i18n="co_phone">เบอร์โทรศัพท์</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="08x-xxx-xxxx" required></label>
+          <label class="full"><span data-i18n="co_line1">บ้านเลขที่ / ถนน / ซอย / อาคาร</span><input name="line1" autocomplete="street-address" required></label>
+          <label><span data-i18n="co_district">แขวง/ตำบล, เขต/อำเภอ</span><input name="district" autocomplete="address-level2" required></label>
+          <label><span data-i18n="co_province">จังหวัด</span><input name="province" list="coProv" autocomplete="address-level1" required></label>
+          <label><span data-i18n="co_postal">รหัสไปรษณีย์</span><input name="postal" inputmode="numeric" maxlength="5" autocomplete="postal-code" required></label>
+          <label><span data-i18n="co_email">อีเมล (สำหรับใบเสร็จ ไม่บังคับ)</span><input name="email" type="email" autocomplete="email"></label>
+        </div>
+        <datalist id="coProv"><option value="กรุงเทพมหานคร"><option value="กระบี่"><option value="กาญจนบุรี"><option value="กาฬสินธุ์"><option value="กำแพงเพชร"><option value="ขอนแก่น"><option value="จันทบุรี"><option value="ฉะเชิงเทรา"><option value="ชลบุรี"><option value="ชัยนาท"><option value="ชัยภูมิ"><option value="ชุมพร"><option value="เชียงราย"><option value="เชียงใหม่"><option value="ตรัง"><option value="ตราด"><option value="ตาก"><option value="นครนายก"><option value="นครปฐม"><option value="นครพนม"><option value="นครราชสีมา"><option value="นครศรีธรรมราช"><option value="นครสวรรค์"><option value="นนทบุรี"><option value="นราธิวาส"><option value="น่าน"><option value="บึงกาฬ"><option value="บุรีรัมย์"><option value="ปทุมธานี"><option value="ประจวบคีรีขันธ์"><option value="ปราจีนบุรี"><option value="ปัตตานี"><option value="พระนครศรีอยุธยา"><option value="พะเยา"><option value="พังงา"><option value="พัทลุง"><option value="พิจิตร"><option value="พิษณุโลก"><option value="เพชรบุรี"><option value="เพชรบูรณ์"><option value="แพร่"><option value="ภูเก็ต"><option value="มหาสารคาม"><option value="มุกดาหาร"><option value="แม่ฮ่องสอน"><option value="ยโสธร"><option value="ยะลา"><option value="ร้อยเอ็ด"><option value="ระนอง"><option value="ระยอง"><option value="ราชบุรี"><option value="ลพบุรี"><option value="ลำปาง"><option value="ลำพูน"><option value="เลย"><option value="ศรีสะเกษ"><option value="สกลนคร"><option value="สงขลา"><option value="สตูล"><option value="สมุทรปราการ"><option value="สมุทรสงคราม"><option value="สมุทรสาคร"><option value="สระแก้ว"><option value="สระบุรี"><option value="สิงห์บุรี"><option value="สุโขทัย"><option value="สุพรรณบุรี"><option value="สุราษฎร์ธานี"><option value="สุรินทร์"><option value="หนองคาย"><option value="หนองบัวลำภู"><option value="อ่างทอง"><option value="อำนาจเจริญ"><option value="อุดรธานี"><option value="อุตรดิตถ์"><option value="อุทัยธานี"><option value="อุบลราชธานี"></datalist>
+      </form>
+
+      <div class="co-card">
+        <h3><span class="co-ic">📦</span><span data-i18n="co_pkg">รายการสินค้า</span><span class="co-shop">Trendbox</span></h3>
+        <div id="coItems"></div>
+        <div class="co-deliv">
+          <div><strong data-i18n="co_deliv">จัดส่งมาตรฐาน</strong><span data-i18n="co_deliv_s">Flash, Kerry หรือไปรษณีย์ไทย · ได้รับภายใน 2–4 วัน</span></div>
+          <div class="co-free"><s id="coShipWas"></s> <b data-i18n="free">ฟรี</b></div>
+        </div>
+      </div>
+
+      <div class="co-card">
+        <h3><span class="co-ic">💳</span><span data-i18n="co_pay">วิธีการชำระเงิน</span></h3>
+        <div class="co-pays" role="radiogroup">
+          <label class="co-pay"><input type="radio" name="pm" value="promptpay" checked><span class="pm-ic pm-pp">QR</span><span><strong>PromptPay</strong><small data-i18n="co_pp_s">สแกน QR จ่ายผ่านแอปธนาคาร</small></span></label>
+          <label class="co-pay"><input type="radio" name="pm" value="card"><span class="pm-ic pm-card"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 9.5h19" stroke="currentColor" stroke-width="2.4"/></svg></span><span><strong data-i18n="co_card">บัตรเครดิต / เดบิต</strong><small>Visa · Mastercard</small></span></label>
+          <label class="co-pay"><input type="radio" name="pm" value="cod"><span class="pm-ic pm-cod">฿</span><span><strong data-i18n="co_cod">เก็บเงินปลายทาง</strong><small data-i18n="co_cod_s">ยืนยันคำสั่งซื้อทาง LINE แล้วจ่ายเมื่อได้รับของ</small></span></label>
+        </div>
+      </div>
+    </div>
+
+    <aside class="co-side">
+      <div class="co-card">
+        <h3 data-i18n="co_sum">สรุปคำสั่งซื้อ</h3>
+        <div id="coSum"></div>
+        <ul class="co-trust">
+          <li data-i18n="co_t1">ชำระเงินปลอดภัยผ่าน Stripe</li>
+          <li data-i18n="co_t2">ส่งฟรีทุกออเดอร์ ทั่วประเทศไทย</li>
+          <li data-i18n="co_t3">มีปัญหา? ทักเราทาง LINE ได้ทุกวัน</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <div class="co-bar">
+    <div class="co-bar-in">
+      <div class="co-total"><span data-i18n="total">รวมทั้งหมด</span><b id="coTotal">฿0</b><small id="coSave"></small></div>
+      <button type="button" class="co-place" id="coPlace" data-i18n="co_place">สั่งซื้อ</button>
+    </div>
+  </div>
+</section>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <dialog class="pd" id="pd" aria-label="Product details" onclose="document.getElementById('pdMain').innerHTML=''">
   <button class="pd-close" id="pdClose" aria-label="Close">×</button>
@@ -514,7 +637,7 @@ const ART = {lighter:"lighter",watch:"watch",electronics:"radio",perfume:"bottle
 
 /* ===== Text ===== */
 const T = {
-  th:{cat_all:"ทั้งหมด",buy_now:"ซื้อเลย",cat_lighter:"ไฟแช็กและที่เขี่ย",cat_watch:"นาฬิกา",cat_electronics:"อิเล็กทรอนิกส์",cat_perfume:"น้ำหอม",cat_lifestyle:"ของใช้",ask_price:"สอบถามราคา",view_laz:"ดูบน Lazada",total_tbd:"แจ้งยอดทาง LINE",ask_note:"บางรายการร้านจะแจ้งราคาให้ทาง LINE",pay:"ชำระด้วยบัตร หรือ PromptPay",sold_out:"สินค้าหมด",photos:"รูป",video:"วิดีโอ",details:"รายละเอียดสินค้า",photo:"รูปที่",view_photos:"ดูรูปสินค้า",prev:"รูปก่อนหน้า",next:"รูปถัดไป",choose:"เลือกแบบ",max_stock:"ครบจำนวนสินค้าที่มีแล้ว",pay_note:"บัตรเครดิต/เดบิต หรือสแกน QR PromptPay ผ่านหน้าชำระเงินที่ปลอดภัยของ Stripe",pay_need_price:"ชำระออนไลน์ได้เมื่อทุกรายการมีราคา",or_line:"หรือเก็บเงินปลายทาง / สอบถามก่อน",paying:"กำลังไปหน้าชำระเงิน…",pay_err:"ยังชำระออนไลน์ไม่ได้ กรุณาสั่งทาง LINE",thanks_title:"ชำระเงินเรียบร้อย ขอบคุณค่ะ",thanks_body:"เราได้รับคำสั่งซื้อแล้ว และจะส่งเลขพัสดุให้ทางอีเมลหรือ LINE ภายในวันถัดไป",thanks_btn:"กลับไปที่ร้าน",
+  th:{cat_all:"ทั้งหมด",co_title:"ทำการสั่งซื้อ",co_secure:"ชำระเงินปลอดภัย",co_addr:"ที่อยู่จัดส่ง",co_name:"ชื่อ-นามสกุล",co_phone:"เบอร์โทรศัพท์",co_line1:"บ้านเลขที่ / ถนน / ซอย / อาคาร",co_district:"แขวง/ตำบล, เขต/อำเภอ",co_province:"จังหวัด",co_postal:"รหัสไปรษณีย์",co_email:"อีเมล (สำหรับใบเสร็จ ไม่บังคับ)",co_pkg:"รายการสินค้า",co_deliv:"จัดส่งมาตรฐาน",co_deliv_s:"Flash, Kerry หรือไปรษณีย์ไทย · ได้รับภายใน 2–4 วัน",co_pay:"วิธีการชำระเงิน",co_pp_s:"สแกน QR จ่ายผ่านแอปธนาคาร",co_card:"บัตรเครดิต / เดบิต",co_cod:"เก็บเงินปลายทาง",co_cod_s:"ยืนยันคำสั่งซื้อทาง LINE แล้วจ่ายเมื่อได้รับของ",co_sum:"สรุปคำสั่งซื้อ",co_t1:"ชำระเงินปลอดภัยผ่าน Stripe",co_t2:"ส่งฟรีทุกออเดอร์ ทั่วประเทศไทย",co_t3:"มีปัญหา? ทักเราทาง LINE ได้ทุกวัน",co_place:"สั่งซื้อและชำระเงิน",co_place_cod:"สั่งซื้อผ่าน LINE",co_sub:n=>`ราคาสินค้า (${n} ชิ้น)`,co_saved:"ส่วนลด",co_save:x=>`ประหยัด ${x}`,co_fix:"กรุณากรอกที่อยู่ให้ครบถ้วน",buy_now:"ซื้อเลย",cat_lighter:"ไฟแช็กและที่เขี่ย",cat_watch:"นาฬิกา",cat_electronics:"อิเล็กทรอนิกส์",cat_perfume:"น้ำหอม",cat_lifestyle:"ของใช้",ask_price:"สอบถามราคา",view_laz:"ดูบน Lazada",total_tbd:"แจ้งยอดทาง LINE",ask_note:"บางรายการร้านจะแจ้งราคาให้ทาง LINE",pay:"ดำเนินการสั่งซื้อ",sold_out:"สินค้าหมด",photos:"รูป",video:"วิดีโอ",details:"รายละเอียดสินค้า",photo:"รูปที่",view_photos:"ดูรูปสินค้า",prev:"รูปก่อนหน้า",next:"รูปถัดไป",choose:"เลือกแบบ",max_stock:"ครบจำนวนสินค้าที่มีแล้ว",pay_note:"PromptPay · บัตรเครดิต/เดบิต · เก็บเงินปลายทาง",pay_need_price:"ชำระออนไลน์ได้เมื่อทุกรายการมีราคา",or_line:"หรือเก็บเงินปลายทาง / สอบถามก่อน",paying:"กำลังไปหน้าชำระเงิน…",pay_err:"ยังชำระออนไลน์ไม่ได้ กรุณาสั่งทาง LINE",thanks_title:"ชำระเงินเรียบร้อย ขอบคุณค่ะ",thanks_body:"เราได้รับคำสั่งซื้อแล้ว และจะส่งเลขพัสดุให้ทางอีเมลหรือ LINE ภายในวันถัดไป",thanks_btn:"กลับไปที่ร้าน",
     sl1_tag:"มาใหม่",sl1_t:"ไฟแช็กน้ำมันวินเทจ",sl1_s:"กันลม เติมน้ำมันได้ ใช้ได้นาน",sl1_c:"ดูไฟแช็ก",sl2_tag:"ขายดี",sl2_t:"นาฬิกาหน้าปัดทอง",sl2_s:"สไตล์คลาสสิก ทั้งออโตเมติกและควอตซ์",sl2_c:"ดูนาฬิกา",sl3_tag:"อากาศสะอาด",sl3_t:"เครื่องฟอกอากาศ HEPA",sl3_s:"อากาศสดชื่นสำหรับบ้านและคอนโด",sl3_c:"ดูอิเล็กทรอนิกส์",sl4_tag:"เก็บเงินปลายทาง",sl4_t:"ที่เขี่ยบุหรี่แก้วและสแตนเลส",sl4_s:"ส่งฟรีทุกออเดอร์ผ่านเว็บไซต์",announce:"ส่งฟรีทุกออเดอร์ เมื่อสั่งซื้อผ่านเว็บไซต์ของเรา",announce_tag:"ส่งฟรี ฿0",announce_sub:"ไม่มีขั้นต่ำ ส่งทั่วไทย 2–4 วัน",announce_cta:"ช้อปเลย",sale_kicker:"ลดราคา",sale_title:"สินค้าลดราคา",sale_sub:n=>`ลดสูงสุด <b>${n}%</b> สินค้ามีจำนวนจำกัด`,sale_left:n=>`เหลือเพียง ${n} ชิ้น`,sale_pick:"เลือกตัวเลือก",sl4_c:"ดูที่เขี่ยบุหรี่",shop_now:"ดูสินค้า",
     hero_title:"แสงไฟอุ่นๆ กับของที่มีเรื่องเล่า",hero_sub:"ไฟแช็กน้ำมันสไตล์วินเทจ นาฬิกา และของใช้ดีไซน์เท่ คัดมาสำหรับคนไทย ส่งทั่วประเทศ",hero_cta:"ดูสินค้าทั้งหมด",hero_cta2:"วิธีสั่งซื้อ",
     p1:"ส่งทั่วไทย 2–4 วัน",p1s:"Flash, Kerry หรือไปรษณีย์ไทย",p2:"เก็บเงินปลายทาง",p2s:"หรือโอนผ่าน PromptPay",p3:"ส่งฟรีทุกออเดอร์",p3s:"เมื่อสั่งซื้อผ่านเว็บไซต์",p4:"ตอบไวทาง LINE",p4s:"ทุกวัน 10:00–21:00 น.",
@@ -525,7 +648,7 @@ const T = {
     cart_title:"ตะกร้าของคุณ",empty:"ตะกร้ายังว่างอยู่",empty_btn:"เลือกสินค้า",subtotal:"ราคาสินค้า",shipping:"ค่าจัดส่ง",free:"ฟรี",total:"รวมทั้งหมด",
     more:n=>`ซื้อเพิ่มอีก ฿${n} ส่งฟรี`,order_line:"สั่งซื้อทาง LINE",order_laz:"สั่งผ่าน Lazada แทน",toast_add:"ใส่ตะกร้าแล้ว",toast_copy:"คัดลอกรายการแล้ว วางในแชท LINE ได้เลย",
     msg_head:"สวัสดีค่ะ/ครับ ขอสั่งซื้อสินค้าดังนี้",msg_ship:"ค่าส่ง",msg_total:"รวม",msg_tail:"ชื่อ / ที่อยู่ / เบอร์โทร:\nชำระเงิน: PromptPay / เก็บเงินปลายทาง"},
-  en:{cat_all:"All",buy_now:"Buy now",cat_lighter:"Lighters & ashtrays",cat_watch:"Watches",cat_electronics:"Electronics",cat_perfume:"Perfumes",cat_lifestyle:"Lifestyle",ask_price:"Ask for price",view_laz:"View on Lazada",total_tbd:"Confirmed on LINE",ask_note:"We’ll confirm prices for some items on LINE",pay:"Pay by card or PromptPay",sold_out:"Sold out",photos:"photos",video:"Video",details:"Product details",photo:"Photo",view_photos:"View product photos",prev:"Previous photo",next:"Next photo",choose:"Choose option",max_stock:"That’s all the stock we have",pay_note:"Credit/debit card or PromptPay QR on Stripe’s secure checkout page",pay_need_price:"Online payment opens once every item has a price",or_line:"Or cash on delivery / ask us first",paying:"Opening checkout…",pay_err:"Online payment isn’t available right now. Please order on LINE",thanks_title:"Payment received, thank you",thanks_body:"We’ve got your order and will send your tracking number by email or LINE the next day.",thanks_btn:"Back to the shop",
+  en:{cat_all:"All",co_title:"Checkout",co_secure:"Secure checkout",co_addr:"Delivery address",co_name:"Full name",co_phone:"Phone number",co_line1:"House no. / street / soi / building",co_district:"Subdistrict, district",co_province:"Province",co_postal:"Postal code",co_email:"Email (for your receipt, optional)",co_pkg:"Your items",co_deliv:"Standard delivery",co_deliv_s:"Flash, Kerry or Thailand Post · arrives in 2–4 days",co_pay:"Payment method",co_pp_s:"Scan a QR code with your banking app",co_card:"Credit / debit card",co_cod:"Cash on delivery",co_cod_s:"Confirm your order on LINE, pay when it arrives",co_sum:"Order summary",co_t1:"Secure payment by Stripe",co_t2:"Free delivery on every order across Thailand",co_t3:"Questions? Chat with us on LINE any day",co_place:"Place order & pay",co_place_cod:"Place order on LINE",co_sub:n=>`Subtotal (${n} item${n>1?"s":""})`,co_saved:"Discount",co_save:x=>`You save ${x}`,co_fix:"Please complete your delivery address",buy_now:"Buy now",cat_lighter:"Lighters & ashtrays",cat_watch:"Watches",cat_electronics:"Electronics",cat_perfume:"Perfumes",cat_lifestyle:"Lifestyle",ask_price:"Ask for price",view_laz:"View on Lazada",total_tbd:"Confirmed on LINE",ask_note:"We’ll confirm prices for some items on LINE",pay:"Check out",sold_out:"Sold out",photos:"photos",video:"Video",details:"Product details",photo:"Photo",view_photos:"View product photos",prev:"Previous photo",next:"Next photo",choose:"Choose option",max_stock:"That’s all the stock we have",pay_note:"PromptPay · credit/debit card · cash on delivery",pay_need_price:"Online payment opens once every item has a price",or_line:"Or cash on delivery / ask us first",paying:"Opening checkout…",pay_err:"Online payment isn’t available right now. Please order on LINE",thanks_title:"Payment received, thank you",thanks_body:"We’ve got your order and will send your tracking number by email or LINE the next day.",thanks_btn:"Back to the shop",
     sl1_tag:"NEW ARRIVALS",sl1_t:"Vintage oil lighters",sl1_s:"Windproof, refillable, built to last",sl1_c:"Shop lighters",sl2_tag:"BEST SELLERS",sl2_t:"Gold-dial watches",sl2_s:"Classic automatic & quartz styles",sl2_c:"Shop watches",sl3_tag:"CLEAN AIR",sl3_t:"HEPA air purifiers",sl3_s:"Fresh air for home and condo",sl3_c:"Shop electronics",sl4_tag:"CASH ON DELIVERY",sl4_t:"Glass & steel ashtrays",sl4_s:"Free shipping on every web order",announce:"Free shipping on every order from our website",announce_tag:"FREE ฿0 SHIPPING",announce_sub:"No minimum. Delivered across Thailand in 2–4 days.",announce_cta:"Shop now",sale_kicker:"ON SALE",sale_title:"Deals of the day",sale_sub:n=>`Save up to <b>${n}%</b>, while stock lasts`,sale_left:n=>`Only ${n} left`,sale_pick:"Choose option",sl4_c:"Shop ashtrays",shop_now:"Shop now",
     hero_title:"Warm light and things with a story",hero_sub:"Vintage-style oil lighters, watches and well-designed everyday things, picked for Thailand and shipped nationwide.",hero_cta:"Shop everything",hero_cta2:"How to order",
     p1:"Ships across Thailand in 2–4 days",p1s:"Flash, Kerry or Thailand Post",p2:"Cash on delivery",p2s:"or pay with PromptPay",p3:"Free shipping on every order",p3s:"When you order on our website",p4:"Quick replies on LINE",p4s:"Daily, 10:00–21:00",
@@ -642,11 +765,9 @@ function renderCart(){
     <div class="line total"><span>${t("total")}</span><span>${baht(total)}</span></div>`) + `
     <button class="btn btn-pay" id="payNow" ${unknown ? "disabled" : ""}>${t("pay")}</button>
     <div class="pay-note">${unknown ? t("pay_need_price") : t("pay_note")}</div>
-    <div class="or">${t("or_line")}</div>
-    <button class="btn btn-line" id="orderLine">${t("order_line")}</button>
     <a class="btn btn-laz" href="${LAZADA_URL}" target="_blank" rel="noopener">${t("order_laz")}</a>`;
 }
-function renderAll(){ renderText(); renderHero(); renderSale(); renderChips(); renderGrid(); renderCart(); }
+function renderAll(){ renderText(); renderHero(); renderSale(); renderChips(); renderGrid(); renderCart(); if(!$("#co").hidden) renderCheckout(); }
 
 /* ===== On-sale row ===== */
 const saleV = p => p.v.filter(v => v.price && v.was > v.price && !soldOut(v)).sort((a,b) => a.price/a.was - b.price/b.was)[0];
@@ -746,22 +867,92 @@ async function orderOnLine(){
   try{ await navigator.clipboard.writeText(msg); toast(t("toast_copy")); }catch(e){}
   window.open(`https://line.me/R/oaMessage/${encodeURIComponent(LINE_ID)}/?${encodeURIComponent(msg)}`,"_blank","noopener");
 }
-async function buyNow(btn){
-  const p = PRODUCTS.find(x => x.id === btn.dataset.buy); if(!p) return;
-  const v = pickedV(p); if(!v || soldOut(v)) return;
-  const label = btn.textContent; btn.disabled = true; btn.textContent = t("paying");
+/* ===== Checkout page ===== */
+let co = {items:[], mode:"cart"};
+const CO_FIELDS = ["name","phone","line1","district","province","postal","email"];
+function coLoadAddr(){ try{ return JSON.parse(localStorage.getItem("tb_addr") || "{}") || {}; }catch(e){ return {}; } }
+function coSaveAddr(a){ try{ localStorage.setItem("tb_addr", JSON.stringify(a)); }catch(e){} }
+function openCheckout(items, mode){
+  co = {items, mode};
+  const a = coLoadAddr(), f = $("#coAddr");
+  CO_FIELDS.forEach(n => { if(a[n] && !f[n].value) f[n].value = a[n]; });
+  closeCart(); renderCheckout();
+  if(!coLines().length) return;
+  $("#co").hidden = false; document.body.classList.add("co-open"); $("#co").scrollTop = 0;
+  history.pushState({co:1}, "", "#checkout");
+}
+function closeCheckout(fromPop){
+  if($("#co").hidden) return;
+  $("#co").hidden = true; document.body.classList.remove("co-open");
+  if(!fromPop && location.hash === "#checkout") history.back();
+}
+function coLines(){ return co.items.map(({k,q}) => { const f = lookup(k); return f && f.v.price && !soldOut(f.v) ? {...f, k, q:Math.min(q, f.v.stock ?? 20)} : null; }).filter(Boolean); }
+function renderCheckout(){
+  const lines = coLines();
+  if(!lines.length){ closeCheckout(); return; }
+  $("#coItems").innerHTML = lines.map(({p,v,q}) => `<div class="co-it">${artHTML(p,"thumb",varImg(p,v))}
+    <div><h4>${p.name[lang]}</h4>${v.label ? `<small>${v.label[lang]}</small>` : ""}</div>
+    <div class="pr">${baht(v.price*q)}${v.was > v.price ? `<s>${baht(v.was*q)}</s>` : ""}<span class="q">×${q}</span></div></div>`).join("");
+  const sub = Math.round(lines.reduce((s,{v,q}) => s + v.price*q, 0)*100)/100;
+  const was = Math.round(lines.reduce((s,{v,q}) => s + (v.was > v.price ? v.was : v.price)*q, 0)*100)/100;
+  const ship = SHIP_FEE > 0 && sub < FREE_SHIP ? SHIP_FEE : 0, total = Math.round((sub+ship)*100)/100, save = Math.round((was - sub)*100)/100;
+  const qty = lines.reduce((s,{q}) => s+q, 0);
+  $("#coShipWas").textContent = ship ? "" : baht(50);
+  $("#coSum").innerHTML = `
+    <div class="co-line"><span>${T[lang].co_sub(qty)}</span><span>${baht(was)}</span></div>
+    <div class="co-line"><span>${t("shipping")}</span><span>${ship ? baht(ship) : `<s>${baht(50)}</s>${t("free")}`}</span></div>
+    ${save > 0 ? `<div class="co-line save"><span>${t("co_saved")}</span><span>−${baht(save)}</span></div>` : ""}
+    <div class="co-line tot"><span>${t("total")}</span><span>${baht(total)}</span></div>`;
+  $("#coTotal").textContent = baht(total);
+  $("#coSave").textContent = save > 0 ? T[lang].co_save(baht(save)) : "";
+  coPlaceLabel();
+}
+function coPM(){ return (document.querySelector('input[name="pm"]:checked') || {}).value || "promptpay"; }
+function coPlaceLabel(){ const b = $("#coPlace"), cod = coPM() === "cod"; b.classList.toggle("cod", cod); b.textContent = cod ? t("co_place_cod") : t("co_place"); }
+function coValidate(){
+  const f = $("#coAddr"), a = {}; let bad = null;
+  CO_FIELDS.forEach(n => { a[n] = f[n].value.trim(); f[n].classList.remove("bad"); });
+  a.phone = a.phone.replace(/[^\d+]/g, "");
+  const rules = {name:a.name.length >= 2, phone:/^(\+?66|0)\d{8,9}$/.test(a.phone), line1:a.line1.length >= 3, district:a.district.length >= 2, province:a.province.length >= 2, postal:/^\d{5}$/.test(a.postal), email:!a.email || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(a.email)};
+  Object.entries(rules).forEach(([n,ok]) => { if(!ok){ f[n].classList.add("bad"); bad = bad || f[n]; } });
+  if(bad){ bad.focus(); bad.scrollIntoView({block:"center", behavior:"smooth"}); toast(t("co_fix")); return null; }
+  coSaveAddr(a); return a;
+}
+async function coPlace(){
+  const a = coValidate(); if(!a) return;
+  const lines = coLines(); if(!lines.length) return;
+  const pm = coPM(), btn = $("#coPlace");
+  if(pm === "cod"){
+    const total = lines.reduce((s,{v,q}) => s + v.price*q, 0);
+    const msg = [t("msg_head"), ...lines.map(({p,v,q}) => `• ${itemName(p,v)} x${q} = ${baht(v.price*q)} (#${p.id})`),
+      `${t("msg_ship")}: ${t("free")}`, `${t("msg_total")}: ${baht(total)}`, "",
+      `${t("co_cod")}`, `${a.name} · ${a.phone}`, `${a.line1}, ${a.district}, ${a.province} ${a.postal}`].join("\n");
+    try{ await navigator.clipboard.writeText(msg); toast(t("toast_copy")); }catch(e){}
+    window.open(`https://line.me/R/oaMessage/${encodeURIComponent(LINE_ID)}/?${encodeURIComponent(msg)}`, "_blank", "noopener");
+    return;
+  }
+  btn.disabled = true; btn.textContent = t("paying");
+  try{ if(co.mode === "buy") sessionStorage.setItem("tb_buynow","1"); else sessionStorage.removeItem("tb_buynow"); }catch(e){}
   try{
-    sessionStorage.setItem("tb_buynow", "1");
-  }catch(e){}
-  try{
-    const res = await fetch(CHECKOUT_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({items:[{sku:v.sku, qty:1}], lang})});
+    const res = await fetch(CHECKOUT_URL, {method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({items: lines.map(({v,q}) => ({sku:v.sku, qty:q})), lang, method:pm, customer:a})});
     const data = await res.json();
     if(!res.ok || !data.url) throw new Error(data.error || "checkout failed");
     location.href = data.url;
   }catch(err){
     try{ sessionStorage.removeItem("tb_buynow"); }catch(e){}
-    toast(t("pay_err")); btn.disabled = false; btn.textContent = label;
+    toast(t("pay_err")); btn.disabled = false; coPlaceLabel();
   }
+}
+$("#coBack").addEventListener("click", () => closeCheckout());
+$("#coPlace").addEventListener("click", coPlace);
+document.querySelectorAll('input[name="pm"]').forEach(r => r.addEventListener("change", coPlaceLabel));
+$("#coAddr").addEventListener("input", e => e.target.classList.remove("bad"));
+window.addEventListener("popstate", () => { if(location.hash !== "#checkout") closeCheckout(true); });
+function buyNow(btn){
+  const p = PRODUCTS.find(x => x.id === btn.dataset.buy); if(!p) return;
+  const v = pickedV(p); if(!v || soldOut(v) || !v.price) return;
+  openCheckout([{k:keyOf(p,v), q:1}], "buy");
 }
 async function payNow(btn){
   const items = Object.entries(cart).map(([k,qty]) => ({sku:k.split(":")[1], qty}));
@@ -868,7 +1059,7 @@ document.addEventListener("click", e => {
   if(b.dataset.dec){ const k = b.dataset.dec; cart[k]--; if(cart[k] <= 0) delete cart[k]; save(); renderCart(); return; }
   if(b.id === "emptyBrowse"){ closeCart(); location.hash = "shop"; return; }
   if(b.id === "orderLine"){ orderOnLine(); return; }
-  if(b.id === "payNow"){ payNow(b); return; }
+  if(b.id === "payNow"){ openCheckout(Object.keys(cart).filter(k => lookup(k)).map(k => ({k, q:cart[k]})), "cart"); return; }
   if(b.id === "thanksClose"){ $("#thanks").classList.remove("open"); history.replaceState(null,"",location.pathname); return; }
 });
 $("#cartBtn").addEventListener("click", openCart);
