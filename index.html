@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trendbox — ไฟแช็กน้ำมัน นาฬิกา ของใช้ดีไซน์เท่</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chonburi&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E3E5DF; --surface:#F4F5F1; --ink:#232823; --muted:#5E655E; --line:#C9CCC3;
+  --brass:#A3772A; --brass-ink:#1E2B33; --night:#1E2B33; --night-ink:#EEE9DD; --glow:#F4B860;
+  --tint-lighter:#E9DFCB; --tint-lamp:#DDE3E4; --tint-furniture:#E2DDD3; --tint-electronics:#D9DDD6;
+  --shadow:0 18px 40px -24px rgba(30,43,51,.45);
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#161C1F; --surface:#1F272B; --ink:#E8E6DE; --muted:#A2A9A3; --line:#323C40;
+    --brass:#D5A54E; --brass-ink:#141A1D; --night:#0F1619; --night-ink:#EEE9DD; --glow:#F4B860;
+    --tint-lighter:#2C2A24; --tint-lamp:#232C30; --tint-furniture:#2A2724; --tint-electronics:#242A26;
+    --shadow:0 18px 40px -24px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161C1F; --surface:#1F272B; --ink:#E8E6DE; --muted:#A2A9A3; --line:#323C40;
+  --brass:#D5A54E; --brass-ink:#141A1D; --night:#0F1619; --night-ink:#EEE9DD; --glow:#F4B860;
+  --tint-lighter:#2C2A24; --tint-lamp:#232C30; --tint-furniture:#2A2724; --tint-electronics:#242A26;
+  --shadow:0 18px 40px -24px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.display{font-family:"Chonburi","Georgia",serif;font-weight:400;letter-spacing:.005em;line-height:1.15}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--night)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--night);color:var(--night-ink)}
+.top .wrap{display:flex;align-items:center;gap:18px;height:64px}
+.logo{font-family:"Chonburi",Georgia,serif;font-size:1.45rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo svg{width:22px;height:28px}
+.top nav{display:flex;gap:4px;margin-left:auto}
+.top nav a{text-decoration:none;padding:6px 12px;border-radius:999px;font-size:.95rem;opacity:.85}
+.top nav a:hover{opacity:1;background:rgba(255,255,255,.08)}
+.icon-btn{background:transparent;border:1px solid rgba(238,233,221,.25);border-radius:999px;height:38px;padding:0 14px;display:flex;align-items:center;gap:8px;font-size:.9rem}
+.icon-btn:hover{border-color:rgba(238,233,221,.6)}
+.cart-count{background:var(--glow);color:#1E2B33;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:.8rem;font-weight:600;padding:0 6px}
+@media (max-width:760px){.top nav{display:none}.top .wrap{gap:10px}.lang{margin-left:auto}}
+
+/* hero */
+.hero{background:var(--night);color:var(--night-ink);overflow:hidden;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;min-height:520px;padding-top:30px;padding-bottom:50px}
+.hero h1{font-size:clamp(2.2rem,5.2vw,4rem);margin:0 0 18px;max-width:14ch}
+.hero p{font-size:1.1rem;max-width:44ch;opacity:.85;margin:0 0 28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 24px;border-radius:999px;border:0;font-weight:600;text-decoration:none;font-size:1rem}
+.btn-brass{background:var(--glow);color:#1E2B33}
+.btn-brass:hover{filter:brightness(1.06)}
+.btn-ghost{background:transparent;color:inherit;border:1px solid currentColor}
+.btn-ghost:hover{background:rgba(255,255,255,.06)}
+.flame-stage{position:relative;display:grid;place-items:center;height:440px}
+.flame-stage::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;top:-30px;background:radial-gradient(circle,rgba(244,184,96,.42) 0%,rgba(244,184,96,.12) 35%,transparent 68%);animation:breathe 3.2s ease-in-out infinite}
+.flame-stage svg{position:relative;height:400px;width:auto}
+.flame{transform-origin:100px 118px;animation:flicker 1.6s ease-in-out infinite}
+.flame-core{transform-origin:100px 118px;animation:flicker 1.1s ease-in-out infinite reverse}
+@keyframes flicker{0%,100%{transform:scale(1,1) skewX(0)}25%{transform:scale(.96,1.05) skewX(-2deg)}50%{transform:scale(1.03,.95) skewX(1.5deg)}75%{transform:scale(.98,1.04) skewX(-1deg)}}
+@keyframes breathe{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+@media (max-width:820px){
+  .hero .wrap{grid-template-columns:1fr;min-height:0;padding-top:24px;text-align:left}
+  .flame-stage{height:300px;order:-1}
+  .flame-stage svg{height:280px}
+  .flame-stage::before{width:300px;height:300px;top:-20px}
+}
+
+/* promise strip */
+.promise{border-bottom:1px solid var(--line)}
+.promise ul{list-style:none;margin:0;padding:22px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.promise li{font-size:.95rem;color:var(--muted)}
+.promise strong{display:block;color:var(--ink);font-weight:600;font-size:1rem}
+@media (max-width:760px){.promise ul{grid-template-columns:1fr 1fr}}
+
+/* shop */
+section.shop{padding:64px 0 40px}
+.shop-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}
+.shop-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin:0}
+.shop-head p{margin:6px 0 0;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:7px 16px;font-size:.95rem}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px}
+.card{background:var(--surface);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.card .art{aspect-ratio:1/1;display:grid;place-items:center;padding:12%}
+.card .art svg{width:100%;height:100%}
+.art-btn{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;position:relative}
+.art-btn .count{position:absolute;right:10px;bottom:10px;background:rgba(30,43,51,.72);color:#fff;font-size:.75rem;border-radius:999px;padding:2px 9px}
+.card h3 button{all:unset;cursor:pointer}
+.card h3 button:hover{text-decoration:underline;text-underline-offset:3px}
+dialog.pd{border:0;padding:0;border-radius:24px;background:var(--bg);color:var(--ink);width:min(980px,94vw);max-height:92vh;overflow:auto}
+dialog.pd::backdrop{background:rgba(15,22,25,.6)}
+.pd-in{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;padding:24px}
+.pd-main{position:relative;aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:#E9E6E0;touch-action:pan-y}
+.pd-main img{width:100%;height:100%;object-fit:cover}
+.pd-main .art{height:100%}
+.pd-main video,.pd-main iframe{width:100%;height:100%;object-fit:cover;border:0;display:block;background:#111}
+.vid-badge{position:absolute;left:10px;bottom:10px;display:inline-flex;align-items:center;gap:5px;background:rgba(30,43,51,.78);color:#fff;font-size:.75rem;border-radius:999px;padding:3px 10px 3px 8px}
+.pd-thumbs .vthumb{position:relative;background:#1E2B33}
+.pd-thumbs .vthumb .play{position:absolute;inset:0;display:grid;place-items:center;color:#fff;background:rgba(15,22,25,.35)}
+.pd-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#1E2B33;font-size:1.2rem;display:grid;place-items:center}
+.pd-nav.prev{left:10px}.pd-nav.next{right:10px}
+.pd-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px}
+.pd-thumbs button{flex:0 0 64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;background:#E9E6E0}
+.pd-thumbs button[aria-current="true"]{border-color:var(--brass)}
+.pd-thumbs img{width:100%;height:100%;object-fit:cover}
+.pd-info h2{font-size:1.5rem;margin:6px 0 8px;line-height:1.3}
+.pd-info .desc{color:var(--muted);margin:0 0 14px}
+.pd-info .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+.pd-desc{grid-column:1/-1;border-top:1px solid var(--line);padding-top:20px;max-width:760px;width:100%;margin:0 auto}
+.pd-desc h3{font-size:1.2rem;margin:0 0 14px}
+.pd-desc img{width:100%;height:auto;display:block;border-radius:12px;margin-bottom:10px;background:#E9E6E0}
+.pd-close{position:sticky;top:10px;float:right;margin:10px 10px -50px 0;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:var(--surface);font-size:1.4rem}
+@media (max-width:760px){.pd-in{grid-template-columns:1fr;padding:16px;gap:16px}}
+.card .art.photo{padding:0;background:#E9E6E0}
+.card .art img{width:100%;height:100%;object-fit:cover}
+.price-wrap{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.was{color:var(--muted);font-size:.88rem}
+.sale{font-size:.78rem;font-weight:600;color:#fff;background:#B5462F;border-radius:999px;padding:1px 8px}
+.var{margin-top:8px;width:100%;height:38px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);padding:0 10px;font:inherit;font-size:.92rem}
+.add[disabled]{opacity:.45;cursor:not-allowed;background:transparent;color:var(--ink)}
+.price.ask{font-family:inherit;font-size:.95rem;font-weight:600;color:var(--brass)}
+.lazlink{font-size:.85rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;margin-top:6px;align-self:flex-start}
+.lazlink:hover{color:var(--ink)}
+.item .thumb img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.item .thumb.photo{padding:0;background:#fff;overflow:hidden}
+.card .info{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card h3{font-size:1.05rem;font-weight:600;margin:0;line-height:1.35}
+.card .desc{color:var(--muted);font-size:.92rem;margin:0}
+.card .row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px}
+.price{font-family:"Chonburi",Georgia,serif;font-size:1.25rem}
+.add{border:1px solid var(--ink);background:transparent;border-radius:999px;height:38px;padding:0 16px;font-size:.92rem;font-weight:500}
+.add:hover{background:var(--ink);color:var(--bg)}
+.add.done{background:var(--brass);border-color:var(--brass);color:var(--brass-ink)}
+.badge{align-self:flex-start;font-size:.78rem;color:var(--brass);font-weight:600}
+
+/* how to order */
+section.how{padding:56px 0 70px}
+.how-box{background:var(--surface);border-radius:28px;padding:44px clamp(22px,4vw,56px);display:grid;grid-template-columns:.8fr 1.2fr;gap:40px}
+.how h2{font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 10px}
+.how p.lead{color:var(--muted);margin:0 0 22px;max-width:36ch}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:18px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.steps li::before{content:counter(s);font-family:"Chonburi",Georgia,serif;width:44px;height:44px;border-radius:50%;border:1px solid var(--brass);color:var(--brass);display:grid;place-items:center;font-size:1.1rem}
+.steps strong{display:block;font-weight:600}
+.steps span{color:var(--muted);font-size:.95rem}
+@media (max-width:820px){.how-box{grid-template-columns:1fr}}
+
+/* footer */
+footer{background:var(--night);color:var(--night-ink);padding:48px 0 36px}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+footer h4{margin:0 0 10px;font-weight:600;font-size:1rem}
+footer p,footer a{opacity:.8;font-size:.95rem;margin:0 0 6px;display:block;text-decoration:none}
+footer a:hover{opacity:1;text-decoration:underline}
+.fine{grid-column:1/-1;border-top:1px solid rgba(238,233,221,.15);padding-top:18px;font-size:.85rem;opacity:.6}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr}}
+
+/* cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(15,22,25,.5);opacity:0;pointer-events:none;transition:opacity .25s;z-index:40}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--bg);z-index:50;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer.open{transform:none}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
+.drawer-head h2{margin:0;font-size:1.35rem}
+.close{background:transparent;border:0;font-size:1.6rem;line-height:1;width:40px;height:40px;border-radius:50%}
+.close:hover{background:var(--surface)}
+.items{flex:1;overflow:auto;padding:10px 22px}
+.item{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.item .thumb{width:64px;height:64px;border-radius:12px;padding:8px}
+.item h4{margin:0;font-size:.95rem;font-weight:600;line-height:1.3}
+.item .p{color:var(--muted);font-size:.9rem}
+.qty{display:flex;align-items:center;gap:4px}
+.qty button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:transparent}
+.qty button:hover{border-color:var(--ink)}
+.qty output{min-width:22px;text-align:center}
+.empty{text-align:center;color:var(--muted);padding:60px 10px}
+.empty .btn{margin-top:14px;background:var(--ink);color:var(--bg)}
+.summary{padding:18px 22px 22px;border-top:1px solid var(--line);display:grid;gap:8px}
+.summary .line{display:flex;justify-content:space-between;color:var(--muted);font-size:.95rem}
+.summary .total{color:var(--ink);font-weight:600;font-size:1.1rem}
+.summary .hint{font-size:.85rem;color:var(--brass)}
+.btn-pay{background:var(--ink);color:var(--bg);width:100%}
+.btn-pay:hover{filter:brightness(1.12)}
+.btn-pay[disabled]{opacity:.45;cursor:not-allowed}
+.pay-note{font-size:.82rem;color:var(--muted);text-align:center;margin:-2px 0 4px}
+.or{font-size:.82rem;color:var(--muted);text-align:center}
+.btn-line{background:#06C755;color:#fff;width:100%}
+.thanks{position:fixed;inset:0;z-index:70;display:none;place-items:center;background:rgba(15,22,25,.55);padding:20px}
+.thanks.open{display:grid}
+.thanks-box{background:var(--bg);border-radius:24px;padding:36px 28px;max-width:420px;text-align:center}
+.thanks-box h2{margin:0 0 10px;font-size:1.6rem}
+.thanks-box p{color:var(--muted);margin:0 0 20px}
+.btn-line:hover{filter:brightness(1.05)}
+.btn-laz{background:transparent;border:1px solid var(--ink);color:var(--ink);width:100%}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:.92rem;opacity:0;transition:.25s;z-index:60;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  .flame,.flame-core,.flame-stage::before{animation:none}
+  html{scroll-behavior:auto}
+  .drawer,.scrim,.toast{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Trendbox">
+      <svg viewBox="0 0 22 28" aria-hidden="true"><path d="M11 1c3 5 8 8 8 15a8 8 0 0 1-16 0c0-4 2-6 4-8 0 3 1 5 3 5-1-4 0-8 1-12z" fill="#F4B860"/></svg>
+      Trendbox
+    </a>
+    <nav aria-label="หมวดสินค้า">
+      <a href="#shop" data-jump="lighter" data-i18n="cat_lighter">ไฟแช็ก</a>
+      <a href="#shop" data-jump="watch" data-i18n="cat_watch">นาฬิกา</a>
+      <a href="#shop" data-jump="electronics" data-i18n="cat_electronics">อิเล็กทรอนิกส์</a>
+      <a href="#shop" data-jump="lifestyle" data-i18n="cat_lifestyle">ของใช้</a>
+    </nav>
+    <button class="icon-btn lang" id="langBtn" aria-label="Switch language">EN</button>
+    <button class="icon-btn" id="cartBtn" aria-label="ตะกร้าสินค้า">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1 class="display" data-i18n="hero_title">แสงไฟอุ่นๆ กับของที่มีเรื่องเล่า</h1>
+        <p data-i18n="hero_sub">ไฟแช็กน้ำมันสไตล์วินเทจ นาฬิกา และของใช้ดีไซน์เท่ คัดมาสำหรับคนไทย ส่งทั่วประเทศ</p>
+        <div class="hero-actions">
+          <a class="btn btn-brass" href="#shop" data-i18n="hero_cta">ดูสินค้าทั้งหมด</a>
+          <a class="btn btn-ghost" href="#how" data-i18n="hero_cta2">วิธีสั่งซื้อ</a>
+        </div>
+      </div>
+      <div class="flame-stage" aria-hidden="true">
+        <svg viewBox="0 0 200 400">
+          <defs>
+            <linearGradient id="brassG" x1="0" x2="1">
+              <stop offset="0" stop-color="#8A6424"/><stop offset=".35" stop-color="#E2B964"/><stop offset=".6" stop-color="#C8973F"/><stop offset="1" stop-color="#7A561E"/>
+            </linearGradient>
+            <radialGradient id="flameG" cx=".5" cy=".75" r=".7">
+              <stop offset="0" stop-color="#FFF4D6"/><stop offset=".4" stop-color="#FFC861"/><stop offset="1" stop-color="#F08A2C" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <path class="flame" d="M100 30c14 22 30 42 30 66a30 30 0 0 1-60 0c0-24 16-44 30-66z" fill="url(#flameG)"/>
+          <path class="flame-core" d="M100 70c7 12 14 22 14 34a14 14 0 0 1-28 0c0-12 7-22 14-34z" fill="#FFF7E3" opacity=".9"/>
+          <rect x="96" y="112" width="8" height="14" rx="2" fill="#3A2E22"/>
+          <rect x="58" y="120" width="84" height="78" rx="6" fill="url(#brassG)"/>
+          <g fill="#1E2B33" opacity=".75">
+            <circle cx="74" cy="140" r="4"/><circle cx="90" cy="140" r="4"/><circle cx="110" cy="140" r="4"/><circle cx="126" cy="140" r="4"/>
+            <circle cx="74" cy="158" r="4"/><circle cx="90" cy="158" r="4"/><circle cx="110" cy="158" r="4"/><circle cx="126" cy="158" r="4"/>
+            <circle cx="74" cy="176" r="4"/><circle cx="90" cy="176" r="4"/><circle cx="110" cy="176" r="4"/><circle cx="126" cy="176" r="4"/>
+          </g>
+          <path d="M142 150c16 0 22 8 22 16v14" stroke="#B88A3A" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <circle cx="164" cy="186" r="9" fill="#9C7330"/>
+          <rect x="54" y="198" width="92" height="8" rx="3" fill="#6E4F1D"/>
+          <rect x="54" y="206" width="92" height="160" rx="10" fill="url(#brassG)"/>
+          <rect x="66" y="222" width="68" height="128" rx="6" fill="none" stroke="#7A561E" stroke-width="2" opacity=".6"/>
+          <path d="M72 230v112" stroke="#FFF3D1" stroke-width="5" stroke-linecap="round" opacity=".35"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="promise">
+    <div class="wrap">
+      <ul>
+        <li><strong data-i18n="p1">ส่งทั่วไทย 2–4 วัน</strong><span data-i18n="p1s">Flash, Kerry หรือไปรษณีย์ไทย</span></li>
+        <li><strong data-i18n="p2">เก็บเงินปลายทาง</strong><span data-i18n="p2s">หรือโอนผ่าน PromptPay</span></li>
+        <li><strong data-i18n="p3">ส่งฟรีเมื่อซื้อครบ ฿990</strong><span data-i18n="p3s">ต่ำกว่านั้นค่าส่ง ฿50</span></li>
+        <li><strong data-i18n="p4">ตอบไวทาง LINE</strong><span data-i18n="p4s">ทุกวัน 10:00–21:00 น.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="shop" id="shop">
+    <div class="wrap">
+      <div class="shop-head">
+        <div>
+          <h2 class="display" data-i18n="shop_title">สินค้าในร้าน</h2>
+          <p data-i18n="shop_sub">กดใส่ตะกร้า แล้วส่งคำสั่งซื้อให้เราทาง LINE ได้เลย</p>
+        </div>
+        <div class="chips" role="group" aria-label="กรองสินค้า" id="chips"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="wrap">
+      <div class="how-box">
+        <div>
+          <h2 class="display" data-i18n="how_title">สั่งซื้อง่ายๆ</h2>
+          <p class="lead" data-i18n="how_sub">ไม่ต้องสมัครสมาชิก เลือกของแล้วคุยกับเราทาง LINE ได้เลย หรือจะสั่งผ่าน Lazada ก็ได้</p>
+          <a class="btn btn-ghost" id="lazadaLink" target="_blank" rel="noopener" data-i18n="laz_btn">ดูร้านบน Lazada</a>
+        </div>
+        <ol class="steps">
+          <li><div><strong data-i18n="s1">เลือกสินค้าใส่ตะกร้า</strong><span data-i18n="s1s">เลือกได้หลายชิ้น ปรับจำนวนได้ในตะกร้า</span></div></li>
+          <li><div><strong data-i18n="s2">กด “สั่งซื้อทาง LINE”</strong><span data-i18n="s2s">รายการสินค้าจะถูกส่งเข้าแชทร้านให้อัตโนมัติ</span></div></li>
+          <li><div><strong data-i18n="s3">แจ้งที่อยู่และเลือกวิธีชำระเงิน</strong><span data-i18n="s3s">โอนผ่าน PromptPay หรือเก็บเงินปลายทาง</span></div></li>
+          <li><div><strong data-i18n="s4">รอรับของที่บ้าน</strong><span data-i18n="s4s">เราส่งเลขพัสดุให้ทาง LINE ภายในวันถัดไป</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="logo" style="margin-bottom:10px">Trendbox</div>
+      <p data-i18n="foot_about">ไฟแช็กวินเทจ นาฬิกา และของใช้ดีไซน์เท่ จัดส่งจากกรุงเทพฯ ทั่วประเทศไทย</p>
+    </div>
+    <div>
+      <h4 data-i18n="foot_contact">ติดต่อเรา</h4>
+      <a id="lineFoot" target="_blank" rel="noopener">LINE: @trendbox</a>
+      <a id="lazFoot" target="_blank" rel="noopener">Lazada: Trendbox</a>
+    </div>
+    <div>
+      <h4 data-i18n="foot_note_t">หมายเหตุ</h4>
+      <p data-i18n="foot_note">ไฟแช็กและตะเกียงน้ำมันจัดส่งแบบไม่มีน้ำมัน ตามข้อกำหนดของขนส่ง</p>
+    </div>
+    <div class="fine">© 2026 Trendbox Thailand</div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="ตะกร้าสินค้า" aria-hidden="true">
+  <div class="drawer-head">
+    <h2 class="display" data-i18n="cart_title">ตะกร้าของคุณ</h2>
+    <button class="close" id="closeCart" aria-label="ปิด">×</button>
+  </div>
+  <div class="items" id="items"></div>
+  <div class="summary" id="summary"></div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog class="pd" id="pd" aria-label="Product details" onclose="document.getElementById('pdMain').innerHTML=''">
+  <button class="pd-close" id="pdClose" aria-label="Close">×</button>
+  <div class="pd-in" id="pdBody"></div>
+</dialog>
+<div class="thanks" id="thanks" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
+  <div class="thanks-box">
+    <h2 class="display" id="thanksTitle" data-i18n="thanks_title">ชำระเงินเรียบร้อย ขอบคุณค่ะ</h2>
+    <p data-i18n="thanks_body">เราได้รับคำสั่งซื้อแล้ว และจะส่งเลขพัสดุให้ทางอีเมลหรือ LINE ภายในวันถัดไป</p>
+    <button class="btn btn-brass" id="thanksClose" data-i18n="thanks_btn">กลับไปที่ร้าน</button>
+  </div>
+</div>
+
+<script>
+/* ===== Settings ===== */
+const CHECKOUT_URL = "/.netlify/functions/checkout";            // online payment (card + PromptPay via Stripe)
+const DATA_URL = "shop-data.json";                              // products, prices, stock and shop settings
+
+/* ===== Product illustrations (inline SVG) ===== */
+const I = {
+  watch:`<svg viewBox="0 0 200 200"><rect x="78" y="14" width="44" height="46" rx="8" fill="var(--ink)" opacity=".8"/><rect x="78" y="140" width="44" height="46" rx="8" fill="var(--ink)" opacity=".8"/><circle cx="100" cy="100" r="50" fill="var(--brass)"/><circle cx="100" cy="100" r="40" fill="var(--surface)"/><path d="M100 100V72M100 100l20 10" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><rect x="150" y="94" width="10" height="12" rx="3" fill="var(--brass)"/></svg>`,
+  bottle:`<svg viewBox="0 0 200 200"><rect x="84" y="22" width="32" height="26" rx="4" fill="var(--ink)" opacity=".85"/><rect x="92" y="48" width="16" height="14" fill="var(--brass)"/><rect x="52" y="62" width="96" height="118" rx="16" fill="var(--brass)" opacity=".85"/><rect x="72" y="100" width="56" height="40" rx="4" fill="var(--surface)"/><path d="M64 76v88" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".35"/></svg>`,
+  lighter:`<svg viewBox="0 0 200 200"><path d="M100 18c8 12 16 22 16 34a16 16 0 0 1-32 0c0-12 8-22 16-34z" fill="#F4B860"/><rect x="66" y="62" width="68" height="44" rx="5" fill="var(--brass)"/><g fill="var(--ink)" opacity=".55"><circle cx="80" cy="76" r="3.5"/><circle cx="93" cy="76" r="3.5"/><circle cx="107" cy="76" r="3.5"/><circle cx="120" cy="76" r="3.5"/><circle cx="80" cy="92" r="3.5"/><circle cx="93" cy="92" r="3.5"/><circle cx="107" cy="92" r="3.5"/><circle cx="120" cy="92" r="3.5"/></g><rect x="62" y="106" width="76" height="80" rx="8" fill="var(--brass)"/><rect x="62" y="106" width="76" height="6" fill="var(--ink)" opacity=".25"/><path d="M74 120v54" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".35"/></svg>`,
+  trench:`<svg viewBox="0 0 200 200"><path d="M100 22c7 10 13 18 13 28a13 13 0 0 1-26 0c0-10 6-18 13-28z" fill="#F4B860"/><rect x="88" y="62" width="24" height="14" rx="3" fill="var(--ink)" opacity=".7"/><rect x="72" y="76" width="56" height="112" rx="28" fill="var(--brass)"/><rect x="72" y="104" width="56" height="10" fill="var(--ink)" opacity=".2"/><circle cx="138" cy="86" r="10" fill="none" stroke="var(--brass)" stroke-width="6"/><path d="M86 124v48" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".35"/></svg>`,
+  hurricane:`<svg viewBox="0 0 200 200"><path d="M70 40c0-18 60-18 60 0" fill="none" stroke="var(--ink)" stroke-width="3"/><rect x="82" y="38" width="36" height="12" rx="3" fill="var(--ink)" opacity=".8"/><path d="M78 50h44l10 30c6 22-4 46-32 50-28-4-38-28-32-50z" fill="var(--surface)" stroke="var(--ink)" stroke-width="3" opacity=".9"/><path d="M100 82c5 8 9 14 9 21a9 9 0 0 1-18 0c0-7 4-13 9-21z" fill="#F4B860"/><path d="M60 130h80l-6 44H66z" fill="var(--brass)"/><path d="M54 174h92" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/><path d="M140 140h12v18h-12" fill="none" stroke="var(--ink)" stroke-width="3"/></svg>`,
+  mushroom:`<svg viewBox="0 0 200 200"><path d="M36 104a64 64 0 0 1 128 0z" fill="var(--brass)"/><path d="M36 104h128" stroke="var(--ink)" stroke-width="3"/><ellipse cx="100" cy="108" rx="48" ry="6" fill="#F4B860" opacity=".8"/><path d="M92 106h16l6 66H86z" fill="var(--ink)" opacity=".85"/><ellipse cx="100" cy="176" rx="40" ry="8" fill="var(--ink)"/></svg>`,
+  desk:`<svg viewBox="0 0 200 200"><ellipse cx="70" cy="176" rx="38" ry="8" fill="var(--ink)"/><path d="M70 170 104 98 76 62" fill="none" stroke="var(--brass)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="104" cy="98" r="7" fill="var(--ink)"/><path d="M58 32l58 22-26 34z" fill="var(--brass)"/><path d="M116 54 90 88" stroke="var(--ink)" stroke-width="3"/><path d="M104 74 150 150" stroke="#F4B860" stroke-width="18" opacity=".25" stroke-linecap="round"/></svg>`,
+  chair:`<svg viewBox="0 0 200 200"><defs><pattern id="rattan" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 5h10M5 0v10" stroke="var(--brass)" stroke-width="2"/></pattern></defs><path d="M54 28h92c6 0 10 4 10 10l-8 78H52l-8-78c0-6 4-10 10-10z" fill="url(#rattan)" stroke="var(--ink)" stroke-width="4"/><rect x="40" y="114" width="120" height="18" rx="8" fill="var(--ink)" opacity=".85"/><path d="M52 132l-8 48M148 132l8 48M70 132l-2 40M130 132l2 40" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/></svg>`,
+  table:`<svg viewBox="0 0 200 200"><ellipse cx="100" cy="64" rx="70" ry="18" fill="var(--brass)"/><path d="M30 64v8c0 10 31 18 70 18s70-8 70-18v-8" fill="var(--ink)" opacity=".6"/><path d="M62 86 48 182M138 86l14 96M100 92v90" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/><path d="M58 140h84" stroke="var(--ink)" stroke-width="3" opacity=".5"/></svg>`,
+  radio:`<svg viewBox="0 0 200 200"><path d="M130 62 158 22" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/><rect x="28" y="62" width="144" height="104" rx="18" fill="var(--brass)"/><rect x="40" y="76" width="74" height="76" rx="10" fill="var(--ink)" opacity=".85"/><g fill="var(--brass)" opacity=".7"><circle cx="58" cy="94" r="4"/><circle cx="77" cy="94" r="4"/><circle cx="96" cy="94" r="4"/><circle cx="58" cy="114" r="4"/><circle cx="77" cy="114" r="4"/><circle cx="96" cy="114" r="4"/><circle cx="58" cy="134" r="4"/><circle cx="77" cy="134" r="4"/><circle cx="96" cy="134" r="4"/></g><rect x="124" y="78" width="38" height="20" rx="4" fill="var(--surface)"/><path d="M130 88h26" stroke="var(--ink)" stroke-width="2"/><circle cx="134" cy="126" r="10" fill="var(--ink)"/><circle cx="154" cy="126" r="7" fill="var(--ink)" opacity=".7"/><path d="M44 166v12M156 166v12" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/></svg>`,
+  clock:`<svg viewBox="0 0 200 200"><rect x="26" y="58" width="148" height="92" rx="14" fill="var(--ink)" opacity=".9"/><rect x="40" y="72" width="56" height="64" rx="6" fill="var(--surface)"/><rect x="104" y="72" width="56" height="64" rx="6" fill="var(--surface)"/><path d="M40 104h56M104 104h56" stroke="var(--ink)" stroke-width="2"/><text x="68" y="118" text-anchor="middle" font-family="Chonburi,Georgia,serif" font-size="34" fill="var(--ink)">12</text><text x="132" y="118" text-anchor="middle" font-family="Chonburi,Georgia,serif" font-size="34" fill="var(--ink)">30</text><path d="M44 150v18M156 150v18" stroke="var(--brass)" stroke-width="6" stroke-linecap="round"/></svg>`
+};
+
+/* ===== Shop data =====
+   Products, prices, stock and shop settings are loaded from shop-data.json
+   (edit it with the Trendbox product editor). The copy below is only a fallback. */
+const LAZ = id => `https://www.lazada.co.th/products/pdp-i${id}.html`;
+let SHOP = {"settings":{"lineId":"@trendbox","lazadaUrl":"https://www.lazada.co.th/shop/tekoyepu","freeShip":990,"shipFee":50},"products":[{"id":"16265515510","cat":"lighter","img":"https://filebroker-cdn.lazada.co.th/kf/Se6438e13ccd44f3ea333100dc0acc4f4X.jpg","badge":{"th":"แนะนำ","en":"Our pick"},"name":{"th":"ไฟแช็กน้ำมัน HONEST ลายไม้ วินเทจ","en":"HONEST vintage oil lighter, wood finish"},"desc":{"th":"เติมน้ำมันได้ ปรับระดับไฟได้ มีล็อกกันซึม","en":"Refillable, adjustable flame, safety lock"},"variants":[{"sku":"127582490911","label":{"th":"สีน้ำตาล","en":"Brown"},"price":330,"was":530,"stock":100},{"sku":"127582490910","label":{"th":"สีเขียว","en":"Green"},"price":330,"was":530,"stock":98},{"sku":"127582490909","label":{"th":"สีดำ","en":"Black"},"price":330,"was":530,"stock":100}],"images":["https://filebroker-cdn.lazada.co.th/kf/Se6438e13ccd44f3ea333100dc0acc4f4X.jpg"],"descImages":[]},{"id":"16339793472","cat":"lighter","img":"https://th-live.slatic.net/p/3b492ca42d94ecb39ca817c8a408fff4.jpg","badge":null,"name":{"th":"ไฟแช็กน้ำมันก๊าด ฝาเปิด-ปิด กันลม","en":"Windproof flip-top kerosene lighter"},"desc":{"th":"ตัวโลหะแข็งแรง เติมน้ำมันได้","en":"Sturdy metal body, refillable"},"variants":[{"sku":"127853847422","label":{"th":"สีทอง","en":"Gold"},"price":109,"was":119,"stock":81},{"sku":"127853847421","label":{"th":"Ice","en":"Ice"},"price":109,"was":119,"stock":53},{"sku":"127853847420","label":{"th":"สีดำ","en":"Black"},"price":99,"was":119,"stock":92}],"images":["https://th-live.slatic.net/p/3b492ca42d94ecb39ca817c8a408fff4.jpg"],"descImages":[]},{"id":"16215568865","cat":"lighter","img":"images/metal-lighter-silver.jpg","badge":null,"name":{"th":"ไฟแช็กโลหะ วินเทจ 4 สี","en":"Vintage metal lighter, 4 colours"},"desc":{"th":"ดำ เงิน ทอง หรือ Ice ฝาเปิด-ปิด พกง่าย","en":"Black, silver, gold or ice; flip lid, pocket size"},"variants":[{"sku":"v16215568865","label":null,"price":null,"was":null,"stock":null}],"images":["images/metal-lighter-silver.jpg","images/metal-lighter-gold.jpg","images/metal-lighter-black.jpg","images/metal-lighter-black-open.jpg","images/metal-lighter-black-detail.jpg"],"descImages":["images/metal-lighter-black-open.jpg","images/metal-lighter-black-detail.jpg","images/metal-lighter-silver.jpg","images/metal-lighter-gold.jpg","images/metal-lighter-black.jpg"]},{"id":"16255478168","cat":"lighter","img":"https://filebroker-cdn.lazada.co.th/kf/S6506988b82cd41888b10336c0c71b062y.jpg","badge":null,"name":{"th":"ไฟแช็กไฟฟ้า ชาร์จ USB ระบบสัมผัส","en":"USB rechargeable touch lighter"},"desc":{"th":"ไม่ใช้น้ำมัน กันลม มีไฟบอกระดับแบต","en":"No fuel needed, windproof, battery indicator"},"variants":[{"sku":"127540278178","label":{"th":"สีทอง","en":"Gold"},"price":95.6,"was":119,"stock":98},{"sku":"127540278177","label":{"th":"สีเงิน","en":"Silver"},"price":95.6,"was":119,"stock":99},{"sku":"127540278176","label":{"th":"สีดำ","en":"Black"},"price":95.6,"was":119,"stock":99}],"images":["https://filebroker-cdn.lazada.co.th/kf/S6506988b82cd41888b10336c0c71b062y.jpg"],"descImages":[]},{"id":"16271225442","cat":"lighter","img":"https://filebroker-cdn.lazada.co.th/kf/Sfb9768e7395b4a0d9c1f4ab6c4758e32s.jpg","badge":null,"name":{"th":"ที่เขี่ยบุหรี่แก้วใส ทรงกลม 10.5 ซม.","en":"Round clear glass ashtray, 10.5 cm"},"desc":{"th":"แก้วหนาพิเศษ มี 4 ร่องวาง","en":"Extra-thick glass with 4 rests"},"variants":[{"sku":"127586633064","label":null,"price":46.8,"was":null,"stock":98}],"images":["https://filebroker-cdn.lazada.co.th/kf/Sfb9768e7395b4a0d9c1f4ab6c4758e32s.jpg"],"descImages":[]},{"id":"16289680377","cat":"lighter","img":"https://filebroker-cdn.lazada.co.th/kf/Sa485e30f6c1145af98b57a01bd7636f6r.jpg","badge":null,"name":{"th":"ที่เขี่ยบุหรี่สแตนเลส ลายสิงโต 4 นิ้ว","en":"Lion stainless steel ashtray, 4 in"},"desc":{"th":"ทนทาน กันสนิม ใช้ได้ทั้งบ้านและออฟฟิศ","en":"Durable, rust-proof, for home or office"},"variants":[{"sku":"127654107161","label":null,"price":193,"was":293,"stock":100}],"images":["https://filebroker-cdn.lazada.co.th/kf/Sa485e30f6c1145af98b57a01bd7636f6r.jpg"],"descImages":[]},{"id":"16265391690","cat":"watch","img":"https://filebroker-cdn.lazada.co.th/kf/S22ac29ffb8e5420cbc38ada87cc2f183o.jpg","badge":null,"name":{"th":"นาฬิกา Seiko 5 Automatic หน้าปัดทอง","en":"Seiko 5 Automatic, gold dial"},"desc":{"th":"ระบบออโตเมติก แสดงวันและวันที่","en":"Automatic movement, day-date display"},"variants":[{"sku":"127565477453","label":null,"price":2990,"was":5990,"stock":1}],"images":["https://filebroker-cdn.lazada.co.th/kf/S22ac29ffb8e5420cbc38ada87cc2f183o.jpg"],"descImages":[]},{"id":"16262751466","cat":"watch","img":"https://filebroker-cdn.lazada.co.th/kf/Saed9a61cf105474bab785d300360d580l.jpg","badge":null,"name":{"th":"นาฬิกาสแตนเลส หน้าปัดทอง","en":"Stainless steel watch, gold dial"},"desc":{"th":"สายโลหะ มีช่องวันที่ ใส่ได้ทุกวัน","en":"Metal bracelet with date window"},"variants":[{"sku":"127571408477","label":null,"price":2990,"was":5990,"stock":1}],"images":["https://filebroker-cdn.lazada.co.th/kf/Saed9a61cf105474bab785d300360d580l.jpg"],"descImages":[]},{"id":"16263794548","cat":"watch","img":"https://filebroker-cdn.lazada.co.th/kf/S1e86ce6cded04efd92e495772f88b0b2h.jpg","badge":null,"name":{"th":"นาฬิกาเรือนทอง สายโลหะ","en":"Gold-tone watch, metal bracelet"},"desc":{"th":"ระบบควอตซ์ ใส่ได้ทั้งชายและหญิง","en":"Quartz movement, unisex"},"variants":[{"sku":"127554793628","label":null,"price":2990,"was":5990,"stock":1}],"images":["https://filebroker-cdn.lazada.co.th/kf/S1e86ce6cded04efd92e495772f88b0b2h.jpg"],"descImages":[]},{"id":"16262655621","cat":"watch","img":"https://filebroker-cdn.lazada.co.th/kf/S95ca3da12f60466a84b0d80c3abdf8adx.jpg","badge":null,"name":{"th":"นาฬิกาสีเงิน หน้าปัดทอง พร้อมกล่อง","en":"Silver watch, gold dial, boxed"},"desc":{"th":"ระบบกลไก สายสแตนเลส","en":"Mechanical movement, stainless bracelet"},"variants":[{"sku":"127571522163","label":null,"price":2990,"was":5990,"stock":1}],"images":["https://filebroker-cdn.lazada.co.th/kf/S95ca3da12f60466a84b0d80c3abdf8adx.jpg"],"descImages":[]},{"id":"16142956562","cat":"electronics","img":"https://filebroker-cdn.lazada.co.th/kf/S08f6b0449e3945cc9381a176adce96173.jpg","badge":null,"name":{"th":"เครื่องฟอกอากาศ KADONIA HEPA H13","en":"KADONIA HEPA H13 air purifier"},"desc":{"th":"เสียงเงียบ มาพร้อมแผ่นอโรมา","en":"Quiet, with aromatherapy tablet"},"variants":[{"sku":"127112653204","label":null,"price":299,"was":null,"stock":3}],"images":["https://filebroker-cdn.lazada.co.th/kf/S08f6b0449e3945cc9381a176adce96173.jpg"],"descImages":[]},{"id":"16142246544","cat":"electronics","img":"https://filebroker-cdn.lazada.co.th/kf/S703cd91fe48e404d8b0a0ab901661f3bG.jpg","badge":null,"name":{"th":"เครื่องฟอกอากาศ ONE-HOME HEPA","en":"ONE-HOME HEPA air purifier"},"desc":{"th":"สำหรับใช้ในบ้าน รับประกัน 1 ปี","en":"For home use, 1-year warranty"},"variants":[{"sku":"127122024539","label":null,"price":730,"was":null,"stock":5}],"images":["https://filebroker-cdn.lazada.co.th/kf/S703cd91fe48e404d8b0a0ab901661f3bG.jpg"],"descImages":[]},{"id":"16151051172","cat":"electronics","img":"https://filebroker-cdn.lazada.co.th/kf/Sbe0c1914ec7e458eb35dfb949b5c6c2dN.jpg","badge":null,"name":{"th":"ขาตั้งมือถือ พร้อมลำโพงบลูทูธ","en":"Phone stand with Bluetooth speaker"},"desc":{"th":"หมุนได้ 360° แบตอึด 10 ชม. พับเก็บได้","en":"360° rotation, 10-hour battery, foldable"},"variants":[{"sku":"127147924284","label":null,"price":170,"was":200,"stock":10}],"images":["https://filebroker-cdn.lazada.co.th/kf/Sbe0c1914ec7e458eb35dfb949b5c6c2dN.jpg"],"descImages":[]},{"id":"16140939936","cat":"electronics","img":"https://filebroker-cdn.lazada.co.th/kf/S3101383fa0fe495da319c7fddf530da0O.jpg","badge":null,"name":{"th":"เครื่องพิมพ์พกพา ไม่ใช้หมึก","en":"Inkless pocket printer"},"desc":{"th":"พิมพ์รูป ข้อความ ป้าย แบต 1200mAh","en":"Prints photos, notes and labels; 1200mAh"},"variants":[{"sku":"127108203063","label":{"th":"เขียวชา","en":"Tea green"},"price":339,"was":370,"stock":5},{"sku":"127108203064","label":{"th":"ม่วง","en":"Purple"},"price":339,"was":370,"stock":5},{"sku":"127108203065","label":{"th":"ชมพู","en":"Pink"},"price":339,"was":370,"stock":5},{"sku":"127108203066","label":{"th":"ฟ้า","en":"Blue"},"price":339,"was":370,"stock":5},{"sku":"127108203067","label":{"th":"ขาว-เขียว","en":"White/green"},"price":339,"was":370,"stock":4},{"sku":"127108203068","label":{"th":"ขาว-ชมพู","en":"White/pink"},"price":339,"was":370,"stock":5}],"images":["https://filebroker-cdn.lazada.co.th/kf/S3101383fa0fe495da319c7fddf530da0O.jpg"],"descImages":[]},{"id":"16215092216","cat":"electronics","img":"https://filebroker-cdn.lazada.co.th/kf/Seb00e07657474ccc931a6aa8b85bdf18E.jpg","badge":null,"name":{"th":"TP-Link ขยายสัญญาณ Wi-Fi 300Mbps","en":"TP-Link 300Mbps Wi-Fi extender"},"desc":{"th":"รุ่น TL-WA855RE เสาอากาศคู่","en":"Model TL-WA855RE, dual antennas"},"variants":[{"sku":"127386053023","label":null,"price":769,"was":null,"stock":9}],"images":["https://filebroker-cdn.lazada.co.th/kf/Seb00e07657474ccc931a6aa8b85bdf18E.jpg"],"descImages":[]},{"id":"16106118493","cat":"electronics","img":"https://filebroker-cdn.lazada.co.th/kf/S7619040eced4423897be7981f568aae9i.jpg","badge":null,"name":{"th":"ตัวขยายสัญญาณ Wi-Fi 4 เสา","en":"4-antenna Wi-Fi repeater"},"desc":{"th":"ลดจุดอับสัญญาณในบ้านและออฟฟิศ","en":"Fills dead spots at home or work"},"variants":[{"sku":"126911295364","label":null,"price":198,"was":280,"stock":0}],"images":["https://filebroker-cdn.lazada.co.th/kf/S7619040eced4423897be7981f568aae9i.jpg"],"descImages":[]},{"id":"16308552642","cat":"lifestyle","img":"https://filebroker-cdn.lazada.co.th/kf/S39b01073fa5a4975a470c186b748310cG.jpg","badge":null,"name":{"th":"น้ำหอม Bujairami Too Damn Good (แบ่งขาย)","en":"Bujairami Too Damn Good (decant)"},"desc":{"th":"กลิ่นดอกไม้สดชื่น ผสานไม้หอมอุ่นๆ","en":"Fresh florals over warm woods"},"variants":[{"sku":"127733329178","label":{"th":"5 มล.","en":"5 ml"},"price":159,"was":null,"stock":10},{"sku":"127733329179","label":{"th":"10 มล.","en":"10 ml"},"price":279,"was":null,"stock":10}],"images":["https://filebroker-cdn.lazada.co.th/kf/S39b01073fa5a4975a470c186b748310cG.jpg"],"descImages":[]},{"id":"16171231937","cat":"lifestyle","img":"https://filebroker-cdn.lazada.co.th/kf/S12c886467dc042a886d8d68e162d8136m.jpg","badge":null,"name":{"th":"กรอบโปสเตอร์อัลบั้มเพลง ภาพขาวดำ","en":"Black-and-white album poster frame"},"desc":{"th":"มีรายชื่อเพลง แต่งห้องหรือมุมทำงาน","en":"With tracklist, for your room or desk"},"variants":[{"sku":"127222525204","label":{"th":"แบบ 04","en":"Design 04"},"price":109,"was":null,"stock":10},{"sku":"127222525205","label":{"th":"แบบ 05","en":"Design 05"},"price":109,"was":null,"stock":10},{"sku":"127222525206","label":{"th":"แบบ 06","en":"Design 06"},"price":109,"was":null,"stock":10},{"sku":"127222525207","label":{"th":"แบบ 07","en":"Design 07"},"price":109,"was":null,"stock":10},{"sku":"127222525208","label":{"th":"แบบ 08","en":"Design 08"},"price":109,"was":null,"stock":10},{"sku":"127213975418","label":{"th":"แบบ W0","en":"Design W0"},"price":109,"was":null,"stock":10},{"sku":"127213975419","label":{"th":"แบบ W1","en":"Design W1"},"price":109,"was":null,"stock":10},{"sku":"127213975420","label":{"th":"แบบ W2","en":"Design W2"},"price":109,"was":null,"stock":10},{"sku":"127213975421","label":{"th":"แบบ W3","en":"Design W3"},"price":109,"was":null,"stock":10}],"images":["https://filebroker-cdn.lazada.co.th/kf/S12c886467dc042a886d8d68e162d8136m.jpg"],"descImages":[]},{"id":"16253038125","cat":"lifestyle","img":"https://filebroker-cdn.lazada.co.th/kf/S90ce5a14422c4b5b953efa79276756bas.jpg","badge":null,"name":{"th":"กล่องข้าวสแตนเลส 2 ช่อง มีที่วางมือถือ","en":"2-compartment steel lunch box with phone stand"},"desc":{"th":"อุ่นอาหารได้ พกไปทำงานหรือโรงเรียน","en":"Warms your food, easy to carry"},"variants":[{"sku":"127534434393","label":null,"price":468,"was":489,"stock":10}],"images":["https://filebroker-cdn.lazada.co.th/kf/S90ce5a14422c4b5b953efa79276756bas.jpg"],"descImages":[]},{"id":"16112534521","cat":"lifestyle","img":"https://filebroker-cdn.lazada.co.th/kf/Sb76d21a6dd0640b7bbf16ef90abf9c24X.jpg","badge":null,"name":{"th":"ที่บดกระเทียมสแตนเลส","en":"Stainless steel garlic chopper"},"desc":{"th":"บดหอม ขิง พริก ใช้ง่าย ล้างง่าย","en":"Chops onion, ginger and chili; easy to clean"},"variants":[{"sku":"126966691353","label":null,"price":191,"was":200,"stock":4}],"images":["https://filebroker-cdn.lazada.co.th/kf/Sb76d21a6dd0640b7bbf16ef90abf9c24X.jpg"],"descImages":[]}]};
+let LINE_ID, LAZADA_URL, FREE_SHIP, SHIP_FEE, PRODUCTS;
+function applyShop(d){
+  SHOP = d; const s = d.settings || {};
+  LINE_ID = s.lineId || "@trendbox"; LAZADA_URL = s.lazadaUrl || "https://www.lazada.co.th";
+  FREE_SHIP = Number(s.freeShip) || 0; SHIP_FEE = Number(s.shipFee) || 0;
+  PRODUCTS = (d.products || []).filter(p => p && p.name).map(p => ({...p,
+    images: (Array.isArray(p.images) && p.images.length ? p.images : (p.img ? [p.img] : [])).filter(Boolean),
+    descImages: (Array.isArray(p.descImages) ? p.descImages : []).filter(Boolean),
+    video: p.video && p.video.src ? p.video : null,
+    v: (Array.isArray(p.variants) && p.variants.length) ? p.variants : [{sku:"v"+p.id,label:null,price:null,was:null,stock:null}]}));
+}
+applyShop(SHOP);
+const mainImg = p => p.images[0] || "";
+const varImg = (p,v) => (v && v.image) || mainImg(p);
+/* gallery items: optional video first, then photos */
+const media = p => (p.video ? [{kind:"video", ...p.video}] : []).concat(p.images.map(src => ({kind:"img", src})));
+const ytThumb = id => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+const ART = {lighter:"lighter",watch:"watch",electronics:"radio",lifestyle:"bottle"};
+
+/* ===== Text ===== */
+const T = {
+  th:{cat_all:"ทั้งหมด",cat_lighter:"ไฟแช็กและที่เขี่ย",cat_watch:"นาฬิกา",cat_electronics:"อิเล็กทรอนิกส์",cat_lifestyle:"ของใช้",ask_price:"สอบถามราคา",view_laz:"ดูบน Lazada",total_tbd:"แจ้งยอดทาง LINE",ask_note:"บางรายการร้านจะแจ้งราคาให้ทาง LINE",pay:"ชำระด้วยบัตร หรือ PromptPay",sold_out:"สินค้าหมด",photos:"รูป",video:"วิดีโอ",details:"รายละเอียดสินค้า",photo:"รูปที่",view_photos:"ดูรูปสินค้า",prev:"รูปก่อนหน้า",next:"รูปถัดไป",choose:"เลือกแบบ",max_stock:"ครบจำนวนสินค้าที่มีแล้ว",pay_note:"บัตรเครดิต/เดบิต หรือสแกน QR PromptPay ผ่านหน้าชำระเงินที่ปลอดภัยของ Stripe",pay_need_price:"ชำระออนไลน์ได้เมื่อทุกรายการมีราคา",or_line:"หรือเก็บเงินปลายทาง / สอบถามก่อน",paying:"กำลังไปหน้าชำระเงิน…",pay_err:"ยังชำระออนไลน์ไม่ได้ กรุณาสั่งทาง LINE",thanks_title:"ชำระเงินเรียบร้อย ขอบคุณค่ะ",thanks_body:"เราได้รับคำสั่งซื้อแล้ว และจะส่งเลขพัสดุให้ทางอีเมลหรือ LINE ภายในวันถัดไป",thanks_btn:"กลับไปที่ร้าน",
+    hero_title:"แสงไฟอุ่นๆ กับของที่มีเรื่องเล่า",hero_sub:"ไฟแช็กน้ำมันสไตล์วินเทจ นาฬิกา และของใช้ดีไซน์เท่ คัดมาสำหรับคนไทย ส่งทั่วประเทศ",hero_cta:"ดูสินค้าทั้งหมด",hero_cta2:"วิธีสั่งซื้อ",
+    p1:"ส่งทั่วไทย 2–4 วัน",p1s:"Flash, Kerry หรือไปรษณีย์ไทย",p2:"เก็บเงินปลายทาง",p2s:"หรือโอนผ่าน PromptPay",p3:"ส่งฟรีเมื่อซื้อครบ ฿990",p3s:"ต่ำกว่านั้นค่าส่ง ฿50",p4:"ตอบไวทาง LINE",p4s:"ทุกวัน 10:00–21:00 น.",
+    shop_title:"สินค้าในร้าน",shop_sub:"กดใส่ตะกร้า แล้วส่งคำสั่งซื้อให้เราทาง LINE ได้เลย",add:"ใส่ตะกร้า",added:"เพิ่มแล้ว",
+    how_title:"สั่งซื้อง่ายๆ",how_sub:"ไม่ต้องสมัครสมาชิก เลือกของแล้วคุยกับเราทาง LINE ได้เลย หรือจะสั่งผ่าน Lazada ก็ได้",laz_btn:"ดูร้านบน Lazada",
+    s1:"เลือกสินค้าใส่ตะกร้า",s1s:"เลือกได้หลายชิ้น ปรับจำนวนได้ในตะกร้า",s2:"กด “สั่งซื้อทาง LINE”",s2s:"รายการสินค้าจะถูกส่งเข้าแชทร้านให้อัตโนมัติ",s3:"แจ้งที่อยู่และเลือกวิธีชำระเงิน",s3s:"โอนผ่าน PromptPay หรือเก็บเงินปลายทาง",s4:"รอรับของที่บ้าน",s4s:"เราส่งเลขพัสดุให้ทาง LINE ภายในวันถัดไป",
+    foot_about:"ไฟแช็กวินเทจ นาฬิกา และของใช้ดีไซน์เท่ จัดส่งจากกรุงเทพฯ ทั่วประเทศไทย",foot_contact:"ติดต่อเรา",foot_note_t:"หมายเหตุ",foot_note:"ไฟแช็กและตะเกียงน้ำมันจัดส่งแบบไม่มีน้ำมัน ตามข้อกำหนดของขนส่ง",
+    cart_title:"ตะกร้าของคุณ",empty:"ตะกร้ายังว่างอยู่",empty_btn:"เลือกสินค้า",subtotal:"ราคาสินค้า",shipping:"ค่าจัดส่ง",free:"ฟรี",total:"รวมทั้งหมด",
+    more:n=>`ซื้อเพิ่มอีก ฿${n} ส่งฟรี`,order_line:"สั่งซื้อทาง LINE",order_laz:"สั่งผ่าน Lazada แทน",toast_add:"ใส่ตะกร้าแล้ว",toast_copy:"คัดลอกรายการแล้ว วางในแชท LINE ได้เลย",
+    msg_head:"สวัสดีค่ะ/ครับ ขอสั่งซื้อสินค้าดังนี้",msg_ship:"ค่าส่ง",msg_total:"รวม",msg_tail:"ชื่อ / ที่อยู่ / เบอร์โทร:\nชำระเงิน: PromptPay / เก็บเงินปลายทาง"},
+  en:{cat_all:"All",cat_lighter:"Lighters & ashtrays",cat_watch:"Watches",cat_electronics:"Electronics",cat_lifestyle:"Lifestyle",ask_price:"Ask for price",view_laz:"View on Lazada",total_tbd:"Confirmed on LINE",ask_note:"We’ll confirm prices for some items on LINE",pay:"Pay by card or PromptPay",sold_out:"Sold out",photos:"photos",video:"Video",details:"Product details",photo:"Photo",view_photos:"View product photos",prev:"Previous photo",next:"Next photo",choose:"Choose option",max_stock:"That’s all the stock we have",pay_note:"Credit/debit card or PromptPay QR on Stripe’s secure checkout page",pay_need_price:"Online payment opens once every item has a price",or_line:"Or cash on delivery / ask us first",paying:"Opening checkout…",pay_err:"Online payment isn’t available right now. Please order on LINE",thanks_title:"Payment received, thank you",thanks_body:"We’ve got your order and will send your tracking number by email or LINE the next day.",thanks_btn:"Back to the shop",
+    hero_title:"Warm light and things with a story",hero_sub:"Vintage-style oil lighters, watches and well-designed everyday things, picked for Thailand and shipped nationwide.",hero_cta:"Shop everything",hero_cta2:"How to order",
+    p1:"Ships across Thailand in 2–4 days",p1s:"Flash, Kerry or Thailand Post",p2:"Cash on delivery",p2s:"or pay with PromptPay",p3:"Free shipping over ฿990",p3s:"Otherwise ฿50 shipping",p4:"Quick replies on LINE",p4s:"Daily, 10:00–21:00",
+    shop_title:"Shop",shop_sub:"Add to cart, then send your order to us on LINE.",add:"Add to cart",added:"Added",
+    how_title:"Ordering is easy",how_sub:"No account needed. Pick your items and chat with us on LINE, or order through Lazada.",laz_btn:"Visit us on Lazada",
+    s1:"Add items to your cart",s1s:"Pick as many as you like and adjust quantities in the cart",s2:"Tap “Order on LINE”",s2s:"Your item list goes straight into our chat",s3:"Send your address and choose payment",s3s:"PromptPay transfer or cash on delivery",s4:"Get it at your door",s4s:"We send your tracking number on LINE the next day",
+    foot_about:"Vintage lighters, watches and everyday design, shipped from Bangkok across Thailand.",foot_contact:"Contact",foot_note_t:"Note",foot_note:"Kerosene lighters and lamps ship without fuel, as couriers require.",
+    cart_title:"Your cart",empty:"Your cart is empty",empty_btn:"Browse products",subtotal:"Subtotal",shipping:"Shipping",free:"Free",total:"Total",
+    more:n=>`Add ฿${n} more for free shipping`,order_line:"Order on LINE",order_laz:"Order on Lazada instead",toast_add:"Added to cart",toast_copy:"Order copied, paste it into the LINE chat",
+    msg_head:"Hi, I’d like to order:",msg_ship:"Shipping",msg_total:"Total",msg_tail:"Name / address / phone:\nPayment: PromptPay / cash on delivery"}
+};
+
+/* ===== State ===== */
+let lang = "th", filter = "all", cart = {}, picked = {};
+try{ lang = localStorage.getItem("tb_lang") || "th"; cart = JSON.parse(localStorage.getItem("tb_cart") || "{}") || {}; }catch(e){ cart = {}; }
+const save = () => { try{ localStorage.setItem("tb_cart",JSON.stringify(cart)); localStorage.setItem("tb_lang",lang); }catch(e){} };
+const t = k => T[lang][k];
+const baht = n => "฿" + n.toLocaleString("en-US",{maximumFractionDigits:2});
+const $ = s => document.querySelector(s);
+const keyOf = (p,v) => `${p.id}:${v.sku}`;
+function lookup(key){
+  const [id,sku] = key.split(":"); const p = PRODUCTS.find(x=>x.id===id); if(!p) return null;
+  const v = p.v.find(x=>x.sku===sku); return v ? {p,v} : null;
+}
+const soldOut = v => v.stock === 0;
+const pickedV = p => p.v[picked[p.id]] || p.v[Math.max(0, p.v.findIndex(v=>!soldOut(v)))];
+const itemName = (p,v) => p.name[lang] + (v.label ? ` (${v.label[lang]})` : "");
+// drop cart lines that no longer exist or are sold out
+const cleanCart = () => Object.keys(cart).forEach(k => { const f = lookup(k); if(!f || soldOut(f.v)) delete cart[k]; });
+cleanCart();
+
+/* ===== Render ===== */
+function renderText(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { const v = T[lang][el.dataset.i18n]; if(typeof v === "string") el.textContent = v; });
+  $("#langBtn").textContent = lang === "th" ? "EN" : "ไทย";
+}
+function renderChips(){
+  const cats = ["all","lighter","watch","electronics","lifestyle"];
+  $("#chips").innerHTML = cats.map(c => `<button class="chip" data-cat="${c}" aria-pressed="${filter===c}">${t("cat_"+c)}</button>`).join("");
+}
+const fallback = p => `<div class="__C__" style="background:var(--tint-${p.cat})">${I[ART[p.cat]]}</div>`;
+function artHTML(p,cls,src){
+  src = src ?? mainImg(p);
+  if(!src) return fallback(p).replace("__C__",cls);
+  return `<div class="${cls} photo" data-fb="${p.id}"><img src="${src}" alt="${p.name[lang].replace(/"/g,"&quot;")}" loading="lazy" referrerpolicy="no-referrer" onerror="artFail(this)"></div>`;
+}
+function cardArt(p){
+  const n = p.images.length;
+  return `<button class="art-btn" data-open="${p.id}" aria-label="${t("view_photos")}">${artHTML(p,"art",varImg(p,pickedV(p)))}${p.video ? `<span class="vid-badge"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z" fill="currentColor"/></svg>${t("video")}</span>` : ""}${n > 1 ? `<span class="count">${n} ${t("photos")}</span>` : ""}</button>`;
+}
+function artFail(img){
+  const box = img.parentElement, p = PRODUCTS.find(x=>x.id===box.dataset.fb);
+  if(!box || !p) return;
+  box.classList.remove("photo"); box.style.background = `var(--tint-${p.cat})`; box.innerHTML = I[ART[p.cat]];
+}
+function priceHTML(v){
+  if(!v.price) return `<span class="price ask">${t("ask_price")}</span>`;
+  if(!v.was) return `<span class="price">${baht(v.price)}</span>`;
+  const off = Math.round((1 - v.price/v.was)*100);
+  return `<span class="price-wrap"><span class="price">${baht(v.price)}</span><s class="was">${baht(v.was)}</s>${off >= 5 ? `<span class="sale">-${off}%</span>` : ""}</span>`;
+}
+function cardBottom(p){
+  const v = pickedV(p);
+  const btn = soldOut(v) ? `<button class="add" disabled>${t("sold_out")}</button>` : `<button class="add" data-add="${p.id}">${t("add")}</button>`;
+  return `<div class="row">${priceHTML(v)}${btn}</div>`;
+}
+function renderGrid(){
+  const list = PRODUCTS.filter(p => filter === "all" || p.cat === filter);
+  $("#grid").innerHTML = list.map(p => {
+    const sel = p.v.length > 1 ? `<select class="var" data-var="${p.id}" aria-label="${t("choose")}">${p.v.map((v,i)=>`<option value="${i}" ${pickedV(p)===v?"selected":""}>${v.label[lang]}${soldOut(v)?" — "+t("sold_out"):""}</option>`).join("")}</select>` : "";
+    return `
+    <article class="card">
+      <div data-art="${p.id}">${cardArt(p)}</div>
+      <div class="info">
+        ${p.badge ? `<span class="badge">${p.badge[lang]}</span>` : ""}
+        <h3><button data-open="${p.id}">${p.name[lang]}</button></h3>
+        <p class="desc">${p.desc[lang]}</p>
+        ${/^\d+$/.test(p.id) ? `<a class="lazlink" href="${LAZ(p.id)}" target="_blank" rel="noopener">${t("view_laz")}</a>` : ""}
+        ${sel}
+        <div class="bottom" data-bottom="${p.id}">${cardBottom(p)}</div>
+      </div>
+    </article>`; }).join("");
+}
+function totals(){
+  let unknown = false, sub = 0;
+  Object.entries(cart).forEach(([k,q]) => { const f = lookup(k); if(!f) return; if(!f.v.price){ unknown = true; return; } sub += f.v.price*q; });
+  sub = Math.round(sub*100)/100;
+  const ship = unknown || sub === 0 || sub >= FREE_SHIP ? 0 : SHIP_FEE;
+  return {sub, ship, total: Math.round((sub + ship)*100)/100, unknown};
+}
+function renderCart(){
+  const keys = Object.keys(cart).filter(k => lookup(k));
+  $("#cartCount").textContent = keys.reduce((s,k)=>s+cart[k],0);
+  if(!keys.length){
+    $("#items").innerHTML = `<div class="empty"><p>${t("empty")}</p><button class="btn" id="emptyBrowse">${t("empty_btn")}</button></div>`;
+    $("#summary").innerHTML = "";
+    return;
+  }
+  $("#items").innerHTML = keys.map(k => { const {p,v} = lookup(k); const max = v.stock ?? 20; return `
+    <div class="item">
+      ${artHTML(p,"thumb",varImg(p,v))}
+      <div><h4>${itemName(p,v)}</h4><div class="p">${v.price ? baht(v.price) : t("ask_price")}</div></div>
+      <div class="qty"><button data-dec="${k}" aria-label="−">−</button><output>${cart[k]}</output><button data-inc="${k}" aria-label="+" ${cart[k] >= max ? "disabled" : ""}>+</button></div>
+    </div>`; }).join("");
+  const {sub,ship,total,unknown} = totals();
+  $("#summary").innerHTML = (unknown ? `
+    <div class="line total"><span>${t("total")}</span><span>${t("total_tbd")}</span></div>
+    <div class="hint">${t("ask_note")}</div>` : `
+    <div class="line"><span>${t("subtotal")}</span><span>${baht(sub)}</span></div>
+    <div class="line"><span>${t("shipping")}</span><span>${ship ? baht(ship) : t("free")}</span></div>
+    ${sub < FREE_SHIP ? `<div class="hint">${T[lang].more(Math.ceil(FREE_SHIP-sub))}</div>` : ""}
+    <div class="line total"><span>${t("total")}</span><span>${baht(total)}</span></div>`) + `
+    <button class="btn btn-pay" id="payNow" ${unknown ? "disabled" : ""}>${t("pay")}</button>
+    <div class="pay-note">${unknown ? t("pay_need_price") : t("pay_note")}</div>
+    <div class="or">${t("or_line")}</div>
+    <button class="btn btn-line" id="orderLine">${t("order_line")}</button>
+    <a class="btn btn-laz" href="${LAZADA_URL}" target="_blank" rel="noopener">${t("order_laz")}</a>`;
+}
+function renderAll(){ renderText(); renderChips(); renderGrid(); renderCart(); }
+
+/* ===== Actions ===== */
+let toastTimer;
+function toast(msg){ const el = $("#toast"); el.textContent = msg; el.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(()=>el.classList.remove("show"),2200); }
+function openCart(){ $("#drawer").classList.add("open"); $("#scrim").classList.add("open"); $("#drawer").setAttribute("aria-hidden","false"); $("#closeCart").focus(); }
+function closeCart(){ $("#drawer").classList.remove("open"); $("#scrim").classList.remove("open"); $("#drawer").setAttribute("aria-hidden","true"); $("#cartBtn").focus(); }
+
+function orderMessage(){
+  const {ship,total,unknown} = totals();
+  const lines = Object.entries(cart).map(([k,q]) => { const f = lookup(k); if(!f) return ""; const {p,v} = f; return `• ${itemName(p,v)} x${q} = ${v.price ? baht(v.price*q) : t("ask_price")} (#${p.id})`; }).filter(Boolean);
+  const tail = unknown ? `${t("msg_total")}: ${t("ask_price")}` : `${t("msg_ship")}: ${ship ? baht(ship) : t("free")}\n${t("msg_total")}: ${baht(total)}`;
+  return `${t("msg_head")}\n${lines.join("\n")}\n${tail}\n\n${t("msg_tail")}`;
+}
+async function orderOnLine(){
+  const msg = orderMessage();
+  try{ await navigator.clipboard.writeText(msg); toast(t("toast_copy")); }catch(e){}
+  window.open(`https://line.me/R/oaMessage/${encodeURIComponent(LINE_ID)}/?${encodeURIComponent(msg)}`,"_blank","noopener");
+}
+async function payNow(btn){
+  const items = Object.entries(cart).map(([k,qty]) => ({sku:k.split(":")[1], qty}));
+  btn.disabled = true; btn.textContent = t("paying");
+  try{
+    const res = await fetch(CHECKOUT_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({items, lang})});
+    const data = await res.json();
+    if(!res.ok || !data.url) throw new Error(data.error || "checkout failed");
+    location.href = data.url;
+  }catch(err){
+    toast(t("pay_err")); btn.disabled = false; btn.textContent = t("pay");
+  }
+}
+function showThanks(){
+  cart = {}; save(); renderCart();
+  $("#thanks").classList.add("open"); $("#thanksClose").focus();
+}
+document.addEventListener("change", e => {
+  const sel = e.target.closest("select[data-var]"); if(!sel) return;
+  const p = PRODUCTS.find(x=>x.id===sel.dataset.var); picked[p.id] = +sel.value;
+  document.querySelectorAll(`[data-bottom="${p.id}"]`).forEach(el => el.innerHTML = cardBottom(p));
+  document.querySelectorAll(`select[data-var="${p.id}"]`).forEach(el => el.value = sel.value);
+  const a = document.querySelector(`[data-art="${p.id}"]`); if(a) a.innerHTML = cardArt(p);
+  const vi = pickedV(p).image;
+  if(pd.id === p.id && vi){ const i = media(p).findIndex(x => x.src === vi); if(i >= 0) showPhoto(i); }
+});
+/* ===== Product detail with photo gallery ===== */
+const pd = {id:null, i:0};
+function photoSel(p){ return p.v.length > 1 ? `<select class="var" data-var="${p.id}" aria-label="${t("choose")}">${p.v.map((v,i)=>`<option value="${i}" ${pickedV(p)===v?"selected":""}>${v.label[lang]}${soldOut(v)?" — "+t("sold_out"):""}</option>`).join("")}</select>` : ""; }
+function openDetail(id){
+  const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+  pd.id = id;
+  const m = media(p), vi = pickedV(p).image;
+  const start = vi ? Math.max(0, m.findIndex(x => x.src === vi)) : 0;
+  $("#pdBody").innerHTML = `
+    <div>
+      <div class="pd-main" id="pdMain"></div>
+      ${m.length > 1 ? `<div class="pd-thumbs" id="pdThumbs">${m.map((x,i)=> x.kind === "video"
+        ? `<button data-ph="${i}" class="vthumb" aria-label="${t("video")}">${x.type === "youtube" ? `<img src="${ytThumb(x.src)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : (p.images[0] ? `<img src="${p.images[0]}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : "")}<span class="play"><svg width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z" fill="currentColor"/></svg></span></button>`
+        : `<button data-ph="${i}" aria-label="${t("photo")} ${i+1}"><img src="${x.src}" alt="" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></button>`).join("")}</div>` : ""}
+    </div>
+    <div class="pd-info">
+      ${p.badge ? `<span class="badge">${p.badge[lang]}</span>` : ""}
+      <h2 class="display">${p.name[lang]}</h2>
+      <p class="desc">${p.desc[lang]}</p>
+      ${photoSel(p)}
+      <div data-bottom="${p.id}">${cardBottom(p)}</div>
+      ${/^\d+$/.test(p.id) ? `<a class="lazlink" href="${LAZ(p.id)}" target="_blank" rel="noopener">${t("view_laz")}</a>` : ""}
+    </div>
+    ${p.descImages.length ? `<section class="pd-desc"><h3 class="display">${t("details")}</h3>${p.descImages.map(src => `<img src="${src}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`).join("")}</section>` : ""}`;
+  showPhoto(start);
+  $("#pd").showModal();
+}
+function videoHTML(p, v){
+  if(v.type === "youtube"){
+    const id = encodeURIComponent(v.src);
+    return `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&playsinline=1&rel=0&modestbranding=1" title="${t("video")}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  }
+  const src = /^(https?:|data:|blob:)/.test(v.src) ? v.src : encodeURI(v.src);
+  return `<video src="${src}" ${p.images[0] ? `poster="${p.images[0]}"` : ""} autoplay muted loop playsinline controls preload="metadata"></video>`;
+}
+function showPhoto(i){
+  const p = PRODUCTS.find(x=>x.id===pd.id); if(!p) return;
+  const m = media(p), n = m.length; pd.i = n ? (i + n) % n : 0;
+  const cur = m[pd.i];
+  const inner = !n ? fallback(p).replace("__C__","art")
+    : cur.kind === "video" ? videoHTML(p, cur)
+    : `<img src="${cur.src}" alt="${p.name[lang].replace(/"/g,"&quot;")}" referrerpolicy="no-referrer" onerror="this.parentElement.innerHTML=fallback(PRODUCTS.find(x=>x.id===pd.id)).replace('__C__','art')">`;
+  $("#pdMain").innerHTML = inner +
+    (n > 1 ? `<button class="pd-nav prev" data-ph="${pd.i-1}" aria-label="${t("prev")}">‹</button><button class="pd-nav next" data-ph="${pd.i+1}" aria-label="${t("next")}">›</button>` : "");
+  document.querySelectorAll("#pdThumbs [data-ph]").forEach(b => b.setAttribute("aria-current", +b.dataset.ph === pd.i));
+}
+
+let swipeX = null;
+document.addEventListener("pointerdown", e => { if(e.target.closest("#pdMain")) swipeX = e.clientX; });
+document.addEventListener("pointerup", e => {
+  if(swipeX == null) return; const dx = e.clientX - swipeX; swipeX = null;
+  if(Math.abs(dx) > 40) showPhoto(pd.i + (dx < 0 ? 1 : -1));
+});
+document.addEventListener("keydown", e => {
+  if(!$("#pd").open) return;
+  if(e.key === "ArrowRight") showPhoto(pd.i+1);
+  if(e.key === "ArrowLeft") showPhoto(pd.i-1);
+});
+document.addEventListener("click", e => {
+  const b = e.target.closest("button, a");
+  if(!b || b.disabled) return;
+  if(b.dataset.open){ openDetail(b.dataset.open); return; }
+  if(b.dataset.ph != null){ showPhoto(+b.dataset.ph); return; }
+  if(b.id === "pdClose"){ $("#pd").close(); return; }
+  if(b.dataset.cat){ filter = b.dataset.cat; renderChips(); renderGrid(); return; }
+  if(b.dataset.jump){ filter = b.dataset.jump; renderChips(); renderGrid(); return; }
+  if(b.dataset.add){
+    const p = PRODUCTS.find(x=>x.id===b.dataset.add), v = pickedV(p), k = keyOf(p,v), max = v.stock ?? 20;
+    if((cart[k]||0) >= max){ toast(t("max_stock")); return; }
+    cart[k] = (cart[k]||0) + 1; save(); renderCart();
+    b.textContent = t("added"); b.classList.add("done"); toast(t("toast_add"));
+    setTimeout(()=>{ b.textContent = t("add"); b.classList.remove("done"); },1200);
+    return;
+  }
+  if(b.dataset.inc){ const f = lookup(b.dataset.inc); if(cart[b.dataset.inc] < (f.v.stock ?? 20)) cart[b.dataset.inc]++; save(); renderCart(); return; }
+  if(b.dataset.dec){ const k = b.dataset.dec; cart[k]--; if(cart[k] <= 0) delete cart[k]; save(); renderCart(); return; }
+  if(b.id === "emptyBrowse"){ closeCart(); location.hash = "shop"; return; }
+  if(b.id === "orderLine"){ orderOnLine(); return; }
+  if(b.id === "payNow"){ payNow(b); return; }
+  if(b.id === "thanksClose"){ $("#thanks").classList.remove("open"); history.replaceState(null,"",location.pathname); return; }
+});
+$("#cartBtn").addEventListener("click", openCart);
+$("#closeCart").addEventListener("click", closeCart);
+$("#scrim").addEventListener("click", closeCart);
+document.addEventListener("keydown", e => { if(e.key === "Escape" && $("#drawer").classList.contains("open")) closeCart(); });
+$("#langBtn").addEventListener("click", () => { lang = lang === "th" ? "en" : "th"; save(); renderAll(); });
+
+function setLinks(){
+  $("#lazadaLink").href = LAZADA_URL;
+  $("#lazFoot").href = LAZADA_URL;
+  $("#lineFoot").href = `https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}`;
+  $("#lineFoot").textContent = "LINE: " + LINE_ID;
+}
+setLinks();
+
+renderAll();
+// load the latest products & prices from shop-data.json
+fetch(DATA_URL, {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(d => {
+  if(!d || !Array.isArray(d.products)) return;
+  applyShop(d); picked = {}; cleanCart(); save(); setLinks(); renderAll();
+}).catch(() => {});
+if(location.hash === "#thanks") showThanks();
+if(location.hash === "#cancel"){ history.replaceState(null,"",location.pathname); openCart(); }
+</script>
+</body>
+</html>
