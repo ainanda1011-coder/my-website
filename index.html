@@ -84,8 +84,19 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 }
 
 /* announcement bar */
-.announce{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--glow);color:#1E2B33;font-size:1.05rem;font-weight:700;padding:14px 20px;border-radius:14px;text-align:center;line-height:1.35;margin:0 0 8px}
-.announce svg{flex-shrink:0}
+.announce{position:relative;overflow:hidden;display:flex;align-items:center;gap:18px;background:linear-gradient(110deg,#1E2B33 0%,#2b2a20 55%,#4a3714 100%);color:#fff;padding:18px 24px;border-radius:18px;margin:0 0 8px;box-shadow:0 0 0 2px var(--glow) inset,0 14px 30px rgba(30,43,51,.18)}
+.announce::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-20deg);animation:anShine 3.5s ease-in-out infinite}
+@keyframes anShine{0%,55%{left:-60%}100%{left:130%}}
+.an-ic{flex-shrink:0;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--glow);color:#1E2B33;box-shadow:0 0 0 6px rgba(244,184,96,.25);animation:anBob 1.8s ease-in-out infinite}
+@keyframes anBob{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+.an-tx{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.an-tag{align-self:flex-start;background:#E2483D;color:#fff;font-size:.75rem;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:99px}
+.an-tx strong{font-size:clamp(1.15rem,2.4vw,1.6rem);line-height:1.2;color:var(--glow)}
+.an-sub{font-size:.95rem;opacity:.85}
+.an-cta{flex-shrink:0;background:var(--glow);color:#1E2B33;position:relative;z-index:1}
+.an-cta:hover{filter:brightness(1.06)}
+@media (max-width:600px){.announce{flex-wrap:wrap;gap:12px;padding:16px}.an-ic{width:48px;height:48px}.an-ic svg{width:26px;height:26px}.an-tx{flex-basis:calc(100% - 60px)}.an-cta{width:100%}}
+@media (prefers-reduced-motion:reduce){.announce::after,.an-ic{animation:none}}
 
 /* hero slider (Lazada-style) */
 .lz-hero{background:transparent;color:inherit}
@@ -302,7 +313,11 @@ footer a:hover{opacity:1;text-decoration:underline}
     </div>
   </section>
 
-  <div class="wrap"><div class="announce" role="note"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="17.5" r="1.8" fill="currentColor"/><circle cx="17" cy="17.5" r="1.8" fill="currentColor"/></svg><span data-i18n="announce">ส่งฟรีทุกออเดอร์ เมื่อสั่งซื้อผ่านเว็บไซต์ของเรา</span></div></div>
+  <div class="wrap"><div class="announce" role="note">
+    <div class="an-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M2.5 6.5h12v10h-12zM14.5 9.5h4.2l2.8 3.2v3.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.5" cy="17.5" r="2" fill="#1E2B33" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="17.5" r="2" fill="#1E2B33" stroke="currentColor" stroke-width="1.7"/></svg></div>
+    <div class="an-tx"><span class="an-tag" data-i18n="announce_tag">ส่งฟรี ฿0</span><strong data-i18n="announce">ส่งฟรีทุกออเดอร์ เมื่อสั่งซื้อผ่านเว็บไซต์ของเรา</strong><span class="an-sub" data-i18n="announce_sub">ไม่มีขั้นต่ำ ส่งทั่วไทย 2–4 วัน</span></div>
+    <a class="btn an-cta" href="#shop" data-i18n="announce_cta">ช้อปเลย</a>
+  </div></div>
 
   <div class="promise">
     <div class="wrap">
@@ -435,7 +450,7 @@ const ART = {lighter:"lighter",watch:"watch",electronics:"radio",lifestyle:"bott
 /* ===== Text ===== */
 const T = {
   th:{cat_all:"ทั้งหมด",cat_lighter:"ไฟแช็กและที่เขี่ย",cat_watch:"นาฬิกา",cat_electronics:"อิเล็กทรอนิกส์",cat_lifestyle:"ของใช้",ask_price:"สอบถามราคา",view_laz:"ดูบน Lazada",total_tbd:"แจ้งยอดทาง LINE",ask_note:"บางรายการร้านจะแจ้งราคาให้ทาง LINE",pay:"ชำระด้วยบัตร หรือ PromptPay",sold_out:"สินค้าหมด",photos:"รูป",video:"วิดีโอ",details:"รายละเอียดสินค้า",photo:"รูปที่",view_photos:"ดูรูปสินค้า",prev:"รูปก่อนหน้า",next:"รูปถัดไป",choose:"เลือกแบบ",max_stock:"ครบจำนวนสินค้าที่มีแล้ว",pay_note:"บัตรเครดิต/เดบิต หรือสแกน QR PromptPay ผ่านหน้าชำระเงินที่ปลอดภัยของ Stripe",pay_need_price:"ชำระออนไลน์ได้เมื่อทุกรายการมีราคา",or_line:"หรือเก็บเงินปลายทาง / สอบถามก่อน",paying:"กำลังไปหน้าชำระเงิน…",pay_err:"ยังชำระออนไลน์ไม่ได้ กรุณาสั่งทาง LINE",thanks_title:"ชำระเงินเรียบร้อย ขอบคุณค่ะ",thanks_body:"เราได้รับคำสั่งซื้อแล้ว และจะส่งเลขพัสดุให้ทางอีเมลหรือ LINE ภายในวันถัดไป",thanks_btn:"กลับไปที่ร้าน",
-    sl1_tag:"มาใหม่",sl1_t:"ไฟแช็กน้ำมันวินเทจ",sl1_s:"กันลม เติมน้ำมันได้ ใช้ได้นาน",sl1_c:"ดูไฟแช็ก",sl2_tag:"ขายดี",sl2_t:"นาฬิกาหน้าปัดทอง",sl2_s:"สไตล์คลาสสิก ทั้งออโตเมติกและควอตซ์",sl2_c:"ดูนาฬิกา",sl3_tag:"อากาศสะอาด",sl3_t:"เครื่องฟอกอากาศ HEPA",sl3_s:"อากาศสดชื่นสำหรับบ้านและคอนโด",sl3_c:"ดูอิเล็กทรอนิกส์",sl4_tag:"เก็บเงินปลายทาง",sl4_t:"ที่เขี่ยบุหรี่แก้วและสแตนเลส",sl4_s:"ส่งฟรีทุกออเดอร์ผ่านเว็บไซต์",announce:"ส่งฟรีทุกออเดอร์ เมื่อสั่งซื้อผ่านเว็บไซต์ของเรา",sl4_c:"ดูที่เขี่ยบุหรี่",shop_now:"ดูสินค้า",
+    sl1_tag:"มาใหม่",sl1_t:"ไฟแช็กน้ำมันวินเทจ",sl1_s:"กันลม เติมน้ำมันได้ ใช้ได้นาน",sl1_c:"ดูไฟแช็ก",sl2_tag:"ขายดี",sl2_t:"นาฬิกาหน้าปัดทอง",sl2_s:"สไตล์คลาสสิก ทั้งออโตเมติกและควอตซ์",sl2_c:"ดูนาฬิกา",sl3_tag:"อากาศสะอาด",sl3_t:"เครื่องฟอกอากาศ HEPA",sl3_s:"อากาศสดชื่นสำหรับบ้านและคอนโด",sl3_c:"ดูอิเล็กทรอนิกส์",sl4_tag:"เก็บเงินปลายทาง",sl4_t:"ที่เขี่ยบุหรี่แก้วและสแตนเลส",sl4_s:"ส่งฟรีทุกออเดอร์ผ่านเว็บไซต์",announce:"ส่งฟรีทุกออเดอร์ เมื่อสั่งซื้อผ่านเว็บไซต์ของเรา",announce_tag:"ส่งฟรี ฿0",announce_sub:"ไม่มีขั้นต่ำ ส่งทั่วไทย 2–4 วัน",announce_cta:"ช้อปเลย",sl4_c:"ดูที่เขี่ยบุหรี่",shop_now:"ดูสินค้า",
     hero_title:"แสงไฟอุ่นๆ กับของที่มีเรื่องเล่า",hero_sub:"ไฟแช็กน้ำมันสไตล์วินเทจ นาฬิกา และของใช้ดีไซน์เท่ คัดมาสำหรับคนไทย ส่งทั่วประเทศ",hero_cta:"ดูสินค้าทั้งหมด",hero_cta2:"วิธีสั่งซื้อ",
     p1:"ส่งทั่วไทย 2–4 วัน",p1s:"Flash, Kerry หรือไปรษณีย์ไทย",p2:"เก็บเงินปลายทาง",p2s:"หรือโอนผ่าน PromptPay",p3:"ส่งฟรีทุกออเดอร์",p3s:"เมื่อสั่งซื้อผ่านเว็บไซต์",p4:"ตอบไวทาง LINE",p4s:"ทุกวัน 10:00–21:00 น.",
     shop_title:"สินค้าในร้าน",shop_sub:"กดใส่ตะกร้า แล้วส่งคำสั่งซื้อให้เราทาง LINE ได้เลย",add:"ใส่ตะกร้า",added:"เพิ่มแล้ว",
@@ -446,7 +461,7 @@ const T = {
     more:n=>`ซื้อเพิ่มอีก ฿${n} ส่งฟรี`,order_line:"สั่งซื้อทาง LINE",order_laz:"สั่งผ่าน Lazada แทน",toast_add:"ใส่ตะกร้าแล้ว",toast_copy:"คัดลอกรายการแล้ว วางในแชท LINE ได้เลย",
     msg_head:"สวัสดีค่ะ/ครับ ขอสั่งซื้อสินค้าดังนี้",msg_ship:"ค่าส่ง",msg_total:"รวม",msg_tail:"ชื่อ / ที่อยู่ / เบอร์โทร:\nชำระเงิน: PromptPay / เก็บเงินปลายทาง"},
   en:{cat_all:"All",cat_lighter:"Lighters & ashtrays",cat_watch:"Watches",cat_electronics:"Electronics",cat_lifestyle:"Lifestyle",ask_price:"Ask for price",view_laz:"View on Lazada",total_tbd:"Confirmed on LINE",ask_note:"We’ll confirm prices for some items on LINE",pay:"Pay by card or PromptPay",sold_out:"Sold out",photos:"photos",video:"Video",details:"Product details",photo:"Photo",view_photos:"View product photos",prev:"Previous photo",next:"Next photo",choose:"Choose option",max_stock:"That’s all the stock we have",pay_note:"Credit/debit card or PromptPay QR on Stripe’s secure checkout page",pay_need_price:"Online payment opens once every item has a price",or_line:"Or cash on delivery / ask us first",paying:"Opening checkout…",pay_err:"Online payment isn’t available right now. Please order on LINE",thanks_title:"Payment received, thank you",thanks_body:"We’ve got your order and will send your tracking number by email or LINE the next day.",thanks_btn:"Back to the shop",
-    sl1_tag:"NEW ARRIVALS",sl1_t:"Vintage oil lighters",sl1_s:"Windproof, refillable, built to last",sl1_c:"Shop lighters",sl2_tag:"BEST SELLERS",sl2_t:"Gold-dial watches",sl2_s:"Classic automatic & quartz styles",sl2_c:"Shop watches",sl3_tag:"CLEAN AIR",sl3_t:"HEPA air purifiers",sl3_s:"Fresh air for home and condo",sl3_c:"Shop electronics",sl4_tag:"CASH ON DELIVERY",sl4_t:"Glass & steel ashtrays",sl4_s:"Free shipping on every web order",announce:"Free shipping on every order from our website",sl4_c:"Shop ashtrays",shop_now:"Shop now",
+    sl1_tag:"NEW ARRIVALS",sl1_t:"Vintage oil lighters",sl1_s:"Windproof, refillable, built to last",sl1_c:"Shop lighters",sl2_tag:"BEST SELLERS",sl2_t:"Gold-dial watches",sl2_s:"Classic automatic & quartz styles",sl2_c:"Shop watches",sl3_tag:"CLEAN AIR",sl3_t:"HEPA air purifiers",sl3_s:"Fresh air for home and condo",sl3_c:"Shop electronics",sl4_tag:"CASH ON DELIVERY",sl4_t:"Glass & steel ashtrays",sl4_s:"Free shipping on every web order",announce:"Free shipping on every order from our website",announce_tag:"FREE ฿0 SHIPPING",announce_sub:"No minimum. Delivered across Thailand in 2–4 days.",announce_cta:"Shop now",sl4_c:"Shop ashtrays",shop_now:"Shop now",
     hero_title:"Warm light and things with a story",hero_sub:"Vintage-style oil lighters, watches and well-designed everyday things, picked for Thailand and shipped nationwide.",hero_cta:"Shop everything",hero_cta2:"How to order",
     p1:"Ships across Thailand in 2–4 days",p1s:"Flash, Kerry or Thailand Post",p2:"Cash on delivery",p2s:"or pay with PromptPay",p3:"Free shipping on every order",p3s:"When you order on our website",p4:"Quick replies on LINE",p4s:"Daily, 10:00–21:00",
     shop_title:"Shop",shop_sub:"Add to cart, then send your order to us on LINE.",add:"Add to cart",added:"Added",
