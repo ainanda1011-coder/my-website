@@ -118,12 +118,13 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .sa-art .art svg{width:100%;height:100%}
 .sa-card:hover .art{transform:scale(1.04)}
 .sa-info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
-.sa-info h3{margin:0;font-size:.95rem;font-weight:600;line-height:1.35}
+.sa-info .sa-btn{margin-top:auto}
+.sa-info .price-wrap{min-height:1.9rem;align-items:center}
+
+.sa-info h3{margin:0;font-size:.95rem;font-weight:600;line-height:1.35;min-height:2.7em}
 .sa-info h3 button{all:unset;cursor:pointer;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .sa-info .sale{display:none}
 .sa-left{font-size:.8rem;font-weight:700;color:#E2483D}
-.sa-btn{margin-top:auto;height:40px;font-size:.92rem;background:var(--night);color:var(--night-ink);width:100%}
-.sa-btn.done{background:#2E7D4F;color:#fff}
 @media (max-width:600px){.sale-nav{display:none}.sale-row{grid-auto-columns:46%;gap:12px}}
 
 /* hero slider (Lazada-style) */
@@ -226,7 +227,8 @@ dialog.pd::backdrop{background:rgba(15,22,25,.6)}
 .was{color:var(--muted);font-size:.88rem}
 .sale{font-size:.78rem;font-weight:600;color:#fff;background:#B5462F;border-radius:999px;padding:1px 8px}
 .var{margin-top:8px;width:100%;height:38px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);padding:0 10px;font:inherit;font-size:.92rem}
-.add[disabled]{opacity:.45;cursor:not-allowed;background:transparent;color:var(--ink)}
+.add[disabled]{opacity:.5;cursor:not-allowed;background:var(--line);color:var(--ink);box-shadow:none;transform:none}
+.add[disabled]::before{display:none}
 .price.ask{font-family:inherit;font-size:.95rem;font-weight:600;color:var(--brass)}
 .lazlink{font-size:.85rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;margin-top:6px;align-self:flex-start}
 .lazlink:hover{color:var(--ink)}
@@ -235,11 +237,16 @@ dialog.pd::backdrop{background:rgba(15,22,25,.6)}
 .card .info{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
 .card h3{font-size:1.05rem;font-weight:600;margin:0;line-height:1.35}
 .card .desc{color:var(--muted);font-size:.92rem;margin:0}
-.card .row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px}
+.card .bottom{margin-top:auto}
+.card .row{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding-top:12px}
+.card .row .price-wrap,.card .row>.price{min-height:2.1rem;align-items:center}
 .price{font-family:"Chonburi",Georgia,serif;font-size:1.25rem}
-.add{border:1px solid var(--ink);background:transparent;border-radius:999px;height:38px;padding:0 16px;font-size:.92rem;font-weight:500}
-.add:hover{background:var(--ink);color:var(--bg)}
-.add.done{background:var(--brass);border-color:var(--brass);color:var(--brass-ink)}
+.add,.sa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:46px;padding:0 16px;border:0;border-radius:999px;background:var(--glow);color:#1E2B33;font:inherit;font-size:.98rem;font-weight:700;white-space:nowrap;cursor:pointer;box-shadow:0 6px 16px rgba(244,184,96,.45);transition:transform .15s,box-shadow .15s,filter .15s}
+.add::before,.sa-btn[data-add]::before{content:"";width:18px;height:18px;flex-shrink:0;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='20' r='1.5'/%3E%3Ccircle cx='18' cy='20' r='1.5'/%3E%3Cpath d='M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='20' r='1.5'/%3E%3Ccircle cx='18' cy='20' r='1.5'/%3E%3Cpath d='M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H6'/%3E%3C/svg%3E") center/contain no-repeat}
+.add:hover,.sa-btn:hover{filter:brightness(1.05);transform:translateY(-1px);box-shadow:0 10px 20px rgba(244,184,96,.55)}
+.add:active,.sa-btn:active{transform:translateY(0)}
+
+.add.done,.sa-btn.done{background:#2E7D4F;color:#fff;box-shadow:0 6px 16px rgba(46,125,79,.35)}
 .badge{align-self:flex-start;font-size:.78rem;color:var(--brass);font-weight:600}
 
 /* how to order */
@@ -643,7 +650,7 @@ function renderSale(){
   $("#saleSub").innerHTML = T[lang].sale_sub(max);
   row.innerHTML = list.map(({p,v}) => {
     const off = Math.round((1 - v.price/v.was)*100), multi = p.v.length > 1;
-    const left = v.stock != null && v.stock <= 3 ? `<span class="sa-left">${T[lang].sale_left(v.stock)}</span>` : "";
+    const left = `<span class="sa-left">${v.stock != null && v.stock <= 3 ? T[lang].sale_left(v.stock) : "&nbsp;"}</span>`;
     return `<article class="sa-card">
       <span class="sa-off">-${off}%</span>
       <button type="button" class="sa-art" data-open="${p.id}" aria-label="${p.name[lang].replace(/"/g,"&quot;")}">${artHTML(p,"art",v.image || mainImg(p))}</button>
