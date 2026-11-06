@@ -98,6 +98,34 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 @media (max-width:600px){.announce{flex-wrap:wrap;gap:12px;padding:16px}.an-ic{width:48px;height:48px}.an-ic svg{width:26px;height:26px}.an-tx{flex-basis:calc(100% - 60px)}.an-cta{width:100%}}
 @media (prefers-reduced-motion:reduce){.announce::after,.an-ic{animation:none}}
 
+/* on-sale section */
+.sale-sec{padding:28px 0 8px}
+.sale-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.sale-kicker{display:inline-block;background:#E2483D;color:#fff;font-size:.75rem;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:99px}
+.sale-head h2{font-size:clamp(1.6rem,3.4vw,2.3rem);margin:8px 0 4px}
+.sale-head p{margin:0;color:var(--muted)}
+.sale-head p b{color:#E2483D}
+.sale-nav{display:flex;gap:8px}
+.sale-ar{width:42px;height:42px;border-radius:50%;border:1px solid currentColor;background:transparent;color:inherit;font-size:22px;line-height:1;cursor:pointer}
+.sale-ar:hover{background:rgba(0,0,0,.06)}
+.sale-row{display:grid;grid-auto-flow:column;grid-auto-columns:220px;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 14px;scrollbar-width:thin}
+.sa-card{scroll-snap-align:start;background:var(--surface);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;position:relative;box-shadow:0 0 0 2px rgba(226,72,61,.18)}
+.sa-off{position:absolute;top:10px;left:10px;z-index:1;background:#E2483D;color:#fff;font-weight:800;font-size:.95rem;padding:4px 10px;border-radius:10px;box-shadow:0 4px 10px rgba(226,72,61,.35)}
+.sa-art{all:unset;cursor:pointer;display:block}
+.sa-art .art{aspect-ratio:1/1;display:grid;place-items:center;padding:14%;transition:transform .3s}
+.sa-art .art.photo{padding:0;background:#E9E6E0}
+.sa-art .art img{width:100%;height:100%;object-fit:cover}
+.sa-art .art svg{width:100%;height:100%}
+.sa-card:hover .art{transform:scale(1.04)}
+.sa-info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.sa-info h3{margin:0;font-size:.95rem;font-weight:600;line-height:1.35}
+.sa-info h3 button{all:unset;cursor:pointer;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sa-info .sale{display:none}
+.sa-left{font-size:.8rem;font-weight:700;color:#E2483D}
+.sa-btn{margin-top:auto;height:40px;font-size:.92rem;background:var(--night);color:var(--night-ink);width:100%}
+.sa-btn.done{background:#2E7D4F;color:#fff}
+@media (max-width:600px){.sale-nav{display:none}.sale-row{grid-auto-columns:46%;gap:12px}}
+
 /* hero slider (Lazada-style) */
 .lz-hero{background:transparent;color:inherit}
 .lz-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -324,6 +352,23 @@ footer a:hover{opacity:1;text-decoration:underline}
     <a class="btn an-cta" href="#shop" data-i18n="announce_cta">ช้อปเลย</a>
   </div></div>
 
+  <section class="sale-sec" id="sale" aria-labelledby="saleTitle">
+    <div class="wrap">
+      <div class="sale-head">
+        <div>
+          <span class="sale-kicker" data-i18n="sale_kicker">ลดราคา</span>
+          <h2 class="display" id="saleTitle" data-i18n="sale_title">สินค้าลดราคา</h2>
+          <p id="saleSub"></p>
+        </div>
+        <div class="sale-nav">
+          <button type="button" class="sale-ar" data-sdir="-1" aria-label="Previous">‹</button>
+          <button type="button" class="sale-ar" data-sdir="1" aria-label="Next">›</button>
+        </div>
+      </div>
+      <div class="sale-row" id="saleRow"></div>
+    </div>
+  </section>
+
   <div class="promise">
     <div class="wrap">
       <ul>
@@ -455,7 +500,7 @@ const ART = {lighter:"lighter",watch:"watch",electronics:"radio",lifestyle:"bott
 /* ===== Text ===== */
 const T = {
   th:{cat_all:"ทั้งหมด",cat_lighter:"ไฟแช็กและที่เขี่ย",cat_watch:"นาฬิกา",cat_electronics:"อิเล็กทรอนิกส์",cat_lifestyle:"ของใช้",ask_price:"สอบถามราคา",view_laz:"ดูบน Lazada",total_tbd:"แจ้งยอดทาง LINE",ask_note:"บางรายการร้านจะแจ้งราคาให้ทาง LINE",pay:"ชำระด้วยบัตร หรือ PromptPay",sold_out:"สินค้าหมด",photos:"รูป",video:"วิดีโอ",details:"รายละเอียดสินค้า",photo:"รูปที่",view_photos:"ดูรูปสินค้า",prev:"รูปก่อนหน้า",next:"รูปถัดไป",choose:"เลือกแบบ",max_stock:"ครบจำนวนสินค้าที่มีแล้ว",pay_note:"บัตรเครดิต/เดบิต หรือสแกน QR PromptPay ผ่านหน้าชำระเงินที่ปลอดภัยของ Stripe",pay_need_price:"ชำระออนไลน์ได้เมื่อทุกรายการมีราคา",or_line:"หรือเก็บเงินปลายทาง / สอบถามก่อน",paying:"กำลังไปหน้าชำระเงิน…",pay_err:"ยังชำระออนไลน์ไม่ได้ กรุณาสั่งทาง LINE",thanks_title:"ชำระเงินเรียบร้อย ขอบคุณค่ะ",thanks_body:"เราได้รับคำสั่งซื้อแล้ว และจะส่งเลขพัสดุให้ทางอีเมลหรือ LINE ภายในวันถัดไป",thanks_btn:"กลับไปที่ร้าน",
-    sl1_tag:"มาใหม่",sl1_t:"ไฟแช็กน้ำมันวินเทจ",sl1_s:"กันลม เติมน้ำมันได้ ใช้ได้นาน",sl1_c:"ดูไฟแช็ก",sl2_tag:"ขายดี",sl2_t:"นาฬิกาหน้าปัดทอง",sl2_s:"สไตล์คลาสสิก ทั้งออโตเมติกและควอตซ์",sl2_c:"ดูนาฬิกา",sl3_tag:"อากาศสะอาด",sl3_t:"เครื่องฟอกอากาศ HEPA",sl3_s:"อากาศสดชื่นสำหรับบ้านและคอนโด",sl3_c:"ดูอิเล็กทรอนิกส์",sl4_tag:"เก็บเงินปลายทาง",sl4_t:"ที่เขี่ยบุหรี่แก้วและสแตนเลส",sl4_s:"ส่งฟรีทุกออเดอร์ผ่านเว็บไซต์",announce:"ส่งฟรีทุกออเดอร์ เมื่อสั่งซื้อผ่านเว็บไซต์ของเรา",announce_tag:"ส่งฟรี ฿0",announce_sub:"ไม่มีขั้นต่ำ ส่งทั่วไทย 2–4 วัน",announce_cta:"ช้อปเลย",sl4_c:"ดูที่เขี่ยบุหรี่",shop_now:"ดูสินค้า",
+    sl1_tag:"มาใหม่",sl1_t:"ไฟแช็กน้ำมันวินเทจ",sl1_s:"กันลม เติมน้ำมันได้ ใช้ได้นาน",sl1_c:"ดูไฟแช็ก",sl2_tag:"ขายดี",sl2_t:"นาฬิกาหน้าปัดทอง",sl2_s:"สไตล์คลาสสิก ทั้งออโตเมติกและควอตซ์",sl2_c:"ดูนาฬิกา",sl3_tag:"อากาศสะอาด",sl3_t:"เครื่องฟอกอากาศ HEPA",sl3_s:"อากาศสดชื่นสำหรับบ้านและคอนโด",sl3_c:"ดูอิเล็กทรอนิกส์",sl4_tag:"เก็บเงินปลายทาง",sl4_t:"ที่เขี่ยบุหรี่แก้วและสแตนเลส",sl4_s:"ส่งฟรีทุกออเดอร์ผ่านเว็บไซต์",announce:"ส่งฟรีทุกออเดอร์ เมื่อสั่งซื้อผ่านเว็บไซต์ของเรา",announce_tag:"ส่งฟรี ฿0",announce_sub:"ไม่มีขั้นต่ำ ส่งทั่วไทย 2–4 วัน",announce_cta:"ช้อปเลย",sale_kicker:"ลดราคา",sale_title:"สินค้าลดราคา",sale_sub:n=>`ลดสูงสุด <b>${n}%</b> สินค้ามีจำนวนจำกัด`,sale_left:n=>`เหลือเพียง ${n} ชิ้น`,sale_pick:"เลือกตัวเลือก",sl4_c:"ดูที่เขี่ยบุหรี่",shop_now:"ดูสินค้า",
     hero_title:"แสงไฟอุ่นๆ กับของที่มีเรื่องเล่า",hero_sub:"ไฟแช็กน้ำมันสไตล์วินเทจ นาฬิกา และของใช้ดีไซน์เท่ คัดมาสำหรับคนไทย ส่งทั่วประเทศ",hero_cta:"ดูสินค้าทั้งหมด",hero_cta2:"วิธีสั่งซื้อ",
     p1:"ส่งทั่วไทย 2–4 วัน",p1s:"Flash, Kerry หรือไปรษณีย์ไทย",p2:"เก็บเงินปลายทาง",p2s:"หรือโอนผ่าน PromptPay",p3:"ส่งฟรีทุกออเดอร์",p3s:"เมื่อสั่งซื้อผ่านเว็บไซต์",p4:"ตอบไวทาง LINE",p4s:"ทุกวัน 10:00–21:00 น.",
     shop_title:"สินค้าในร้าน",shop_sub:"กดใส่ตะกร้า แล้วส่งคำสั่งซื้อให้เราทาง LINE ได้เลย",add:"ใส่ตะกร้า",added:"เพิ่มแล้ว",
@@ -466,7 +511,7 @@ const T = {
     more:n=>`ซื้อเพิ่มอีก ฿${n} ส่งฟรี`,order_line:"สั่งซื้อทาง LINE",order_laz:"สั่งผ่าน Lazada แทน",toast_add:"ใส่ตะกร้าแล้ว",toast_copy:"คัดลอกรายการแล้ว วางในแชท LINE ได้เลย",
     msg_head:"สวัสดีค่ะ/ครับ ขอสั่งซื้อสินค้าดังนี้",msg_ship:"ค่าส่ง",msg_total:"รวม",msg_tail:"ชื่อ / ที่อยู่ / เบอร์โทร:\nชำระเงิน: PromptPay / เก็บเงินปลายทาง"},
   en:{cat_all:"All",cat_lighter:"Lighters & ashtrays",cat_watch:"Watches",cat_electronics:"Electronics",cat_lifestyle:"Lifestyle",ask_price:"Ask for price",view_laz:"View on Lazada",total_tbd:"Confirmed on LINE",ask_note:"We’ll confirm prices for some items on LINE",pay:"Pay by card or PromptPay",sold_out:"Sold out",photos:"photos",video:"Video",details:"Product details",photo:"Photo",view_photos:"View product photos",prev:"Previous photo",next:"Next photo",choose:"Choose option",max_stock:"That’s all the stock we have",pay_note:"Credit/debit card or PromptPay QR on Stripe’s secure checkout page",pay_need_price:"Online payment opens once every item has a price",or_line:"Or cash on delivery / ask us first",paying:"Opening checkout…",pay_err:"Online payment isn’t available right now. Please order on LINE",thanks_title:"Payment received, thank you",thanks_body:"We’ve got your order and will send your tracking number by email or LINE the next day.",thanks_btn:"Back to the shop",
-    sl1_tag:"NEW ARRIVALS",sl1_t:"Vintage oil lighters",sl1_s:"Windproof, refillable, built to last",sl1_c:"Shop lighters",sl2_tag:"BEST SELLERS",sl2_t:"Gold-dial watches",sl2_s:"Classic automatic & quartz styles",sl2_c:"Shop watches",sl3_tag:"CLEAN AIR",sl3_t:"HEPA air purifiers",sl3_s:"Fresh air for home and condo",sl3_c:"Shop electronics",sl4_tag:"CASH ON DELIVERY",sl4_t:"Glass & steel ashtrays",sl4_s:"Free shipping on every web order",announce:"Free shipping on every order from our website",announce_tag:"FREE ฿0 SHIPPING",announce_sub:"No minimum. Delivered across Thailand in 2–4 days.",announce_cta:"Shop now",sl4_c:"Shop ashtrays",shop_now:"Shop now",
+    sl1_tag:"NEW ARRIVALS",sl1_t:"Vintage oil lighters",sl1_s:"Windproof, refillable, built to last",sl1_c:"Shop lighters",sl2_tag:"BEST SELLERS",sl2_t:"Gold-dial watches",sl2_s:"Classic automatic & quartz styles",sl2_c:"Shop watches",sl3_tag:"CLEAN AIR",sl3_t:"HEPA air purifiers",sl3_s:"Fresh air for home and condo",sl3_c:"Shop electronics",sl4_tag:"CASH ON DELIVERY",sl4_t:"Glass & steel ashtrays",sl4_s:"Free shipping on every web order",announce:"Free shipping on every order from our website",announce_tag:"FREE ฿0 SHIPPING",announce_sub:"No minimum. Delivered across Thailand in 2–4 days.",announce_cta:"Shop now",sale_kicker:"ON SALE",sale_title:"Deals of the day",sale_sub:n=>`Save up to <b>${n}%</b>, while stock lasts`,sale_left:n=>`Only ${n} left`,sale_pick:"Choose option",sl4_c:"Shop ashtrays",shop_now:"Shop now",
     hero_title:"Warm light and things with a story",hero_sub:"Vintage-style oil lighters, watches and well-designed everyday things, picked for Thailand and shipped nationwide.",hero_cta:"Shop everything",hero_cta2:"How to order",
     p1:"Ships across Thailand in 2–4 days",p1s:"Flash, Kerry or Thailand Post",p2:"Cash on delivery",p2s:"or pay with PromptPay",p3:"Free shipping on every order",p3s:"When you order on our website",p4:"Quick replies on LINE",p4s:"Daily, 10:00–21:00",
     shop_title:"Shop",shop_sub:"Add to cart, then send your order to us on LINE.",add:"Add to cart",added:"Added",
@@ -585,7 +630,34 @@ function renderCart(){
     <button class="btn btn-line" id="orderLine">${t("order_line")}</button>
     <a class="btn btn-laz" href="${LAZADA_URL}" target="_blank" rel="noopener">${t("order_laz")}</a>`;
 }
-function renderAll(){ renderText(); renderHero(); renderChips(); renderGrid(); renderCart(); }
+function renderAll(){ renderText(); renderHero(); renderSale(); renderChips(); renderGrid(); renderCart(); }
+
+/* ===== On-sale row ===== */
+const saleV = p => p.v.filter(v => v.price && v.was > v.price && !soldOut(v)).sort((a,b) => a.price/a.was - b.price/b.was)[0];
+function renderSale(){
+  const row = $("#saleRow"); if(!row) return;
+  const list = PRODUCTS.map(p => ({p, v: saleV(p)})).filter(x => x.v).sort((a,b) => a.v.price/a.v.was - b.v.price/b.v.was);
+  $("#sale").hidden = !list.length; if(!list.length) return;
+  const max = Math.round((1 - list[0].v.price/list[0].v.was)*100);
+  $("#saleSub").innerHTML = T[lang].sale_sub(max);
+  row.innerHTML = list.map(({p,v}) => {
+    const off = Math.round((1 - v.price/v.was)*100), multi = p.v.length > 1;
+    const left = v.stock != null && v.stock <= 3 ? `<span class="sa-left">${T[lang].sale_left(v.stock)}</span>` : "";
+    return `<article class="sa-card">
+      <span class="sa-off">-${off}%</span>
+      <button type="button" class="sa-art" data-open="${p.id}" aria-label="${p.name[lang].replace(/"/g,"&quot;")}">${artHTML(p,"art",v.image || mainImg(p))}</button>
+      <div class="sa-info">
+        <h3><button type="button" data-open="${p.id}">${p.name[lang]}</button></h3>
+        ${priceHTML(v)}${left}
+        ${multi ? `<button type="button" class="btn sa-btn" data-open="${p.id}">${t("sale_pick")}</button>`
+                : `<button type="button" class="btn sa-btn" data-add="${p.id}">${t("add")}</button>`}
+      </div></article>`;
+  }).join("");
+}
+document.querySelectorAll("[data-sdir]").forEach(b => b.addEventListener("click", () => {
+  const row = $("#saleRow"); row.scrollBy({left: +b.dataset.sdir * row.clientWidth * .8, behavior:"smooth"});
+}));
+
 
 /* ===== Hero slider ===== */
 const HERO = [
